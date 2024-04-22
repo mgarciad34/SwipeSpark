@@ -7,7 +7,7 @@
 }
 
 .container {
-  max-width: 400px;
+  max-width: 550px;
   background: #f9f9f9;
   padding: 40px;
   border-radius: 10px;
@@ -16,12 +16,18 @@
 
 .container h2 {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: #333;
 }
 
-.form-group {
+.row {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 20px;
+}
+
+.form-group {
+  flex: 1;
 }
 
 .form-group label {

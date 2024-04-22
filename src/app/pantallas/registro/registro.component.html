@@ -1,33 +1,39 @@
 <div class="container">
-  <h2>Registro</h2>
+  <h2>Crear una cuenta</h2>
   <form action="#" method="post">
-    <div class="form-group">
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" required>
+    <div class="row">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
+      <div class="form-group">
+        <label for="correo">Correo electrónico:</label>
+        <input type="email" id="correo" name="correo" required>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="correo">Correo electrónico:</label>
-      <input type="email" id="correo" name="correo" required>
+    <div class="row">
+      <div class="form-group">
+        <label for="contraseña">Contraseña:</label>
+        <input type="password" id="contraseña" name="contraseña" required>
+      </div>
+      <div class="form-group">
+        <label for="repetir-contraseña">Confirmar contraseña:</label>
+        <input type="password" id="repetir-contraseña" name="repetir-contraseña" required>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="contraseña">Contraseña:</label>
-      <input type="password" id="contraseña" name="contraseña" required>
+    <div class="row">
+      <div class="form-group">
+        <label for="nick">Nick:</label>
+        <input type="text" id="nick" name="nick" required>
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" name="estado" required>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="repetir-contraseña">Repetir contraseña:</label>
-      <input type="password" id="repetir-contraseña" name="repetir-contraseña" required>
+    <button type="submit" class="btn">Siguiente</button>
+    <div class="options">
+      <a routerLink="/login">¿Ya tienes una cuenta? Inicia sesión aquí</a>
     </div>
-    <div class="form-group">
-      <label for="nick">Nick:</label>
-      <input type="text" id="nick" name="nick" required>
-    </div>
-    <div class="form-group">
-      <label for="estado">Estado:</label>
-      <input type="text" id="estado" name="estado" required>
-    </div>
-    <button type="submit" class="btn">Registrarse</button>
   </form>
-  <div class="options">
-    <a routerLink="/">¿Ya tienes una cuenta? Inicia sesión aquí</a>
-  </div>
 </div>
