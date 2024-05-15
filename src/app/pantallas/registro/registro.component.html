@@ -1,51 +1,51 @@
 <div class="container">
-  <h2>Crear una cuenta</h2>
-  <form action="#" method="post">
-    <div class="row">
-      <div class="form-group">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required />
-      </div>
-      <div class="form-group">
-        <label for="correo">Correo electrónico:</label>
-        <input type="email" id="correo" name="correo" required />
-      </div>
-    </div>
-    <div class="row">
-      <div class="form-group">
-        <label for="contraseña">Contraseña:</label>
-        <input type="password" id="contraseña" name="contraseña" required />
-      </div>
-      <div class="form-group">
-        <label for="repetir-contraseña">Confirmar contraseña:</label>
-        <input
-          type="password"
-          id="repetir-contraseña"
-          name="repetir-contraseña"
-          required
-        />
-      </div>
-    </div>
-    <div class="row">
-      <div class="form-group">
-        <label for="nick">Nick:</label>
-        <input type="text" id="nick" name="nick" required />
-      </div>
-      <div class="row">
-        <div class="form-group">
-          <label for="foto-perfil">Foto de perfil:</label>
-          <input type="file" id="foto-perfil" name="foto-perfil" />
-        </div>
-      </div>
-
-      <div class="form-group">
-        <input type="hidden" id="estado" name="estado" value="usuario" />
-      </div>
-    </div>
-
-    <button type="submit" class="btn">Siguiente</button>
-    <div class="options">
-      <a routerLink="/">¿Ya tienes una cuenta? Inicia sesión aquí</a>
-    </div>
-  </form>
-</div>
+     <h2>Crear una cuenta</h2>
+     <form [formGroup]="formulario" (ngSubmit)="enviarRegistro()">
+       <div class="row">
+         <div class="form-group">
+           <label for="Nombre">Nombre:</label>
+           <input type="text" id="nombre" formControlName="Nombre" required />
+         </div>
+         <div class="form-group">
+           <label for="Email">Correo electrónico:</label>
+           <input type="email" id="email" formControlName="Email" required />
+         </div>
+       </div>
+       <div class="row">
+         <div class="form-group">
+           <label for="Contraseña">Contraseña:</label>
+           <input
+             type="password"
+             id="contraseña"
+             formControlName="Contraseña"
+             required
+           />
+         </div>
+         <div class="form-group">
+           <label for="repetir-contraseña">Confirmar contraseña:</label>
+           <input
+             type="password"
+             id="repetir-contraseña"
+             formControlName="repetirContrasena"
+             required
+           />
+         </div>
+       </div>
+       <div class="row">
+         <div class="form-group">
+           <label for="nick">Nick:</label>
+           <input type="text" id="nick" formControlName="Nick" required />
+         </div>
+         <div class="row">
+           <div class="form-group">
+             <label for="foto-perfil">Foto de perfil:</label>
+             <input type="file" id="foto-perfil" formControlName="Foto" accept="image/png, image/jpeg, image/jpg"/>
+           </div>
+         </div>
+       </div>
+       <button type="submit" class="btn">Siguiente</button>
+       <div class="options">
+         <a routerLink="/">¿Ya tienes una cuenta? Inicia sesión aquí</a>
+       </div>
+     </form>
+   </div>

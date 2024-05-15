@@ -6,11 +6,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class RegistroService {
-  private url = 'localhost:9090/api/registrar';
+  private url = 'http://localhost:9090/api/registrar';
 
   constructor(private http: HttpClient) {}
 
   crearRegistro(registro: FormData): Observable<any> {
-    return this.http.post(this.url, registro);
+
+    var json: { [key: string]: any } = {};
+    registro.forEach(function (value, key) {
+        json[key] = value
+    }
+    );
+    console.log(json);
+    return this.http.post(this.url, json);
   }
 }
