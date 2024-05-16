@@ -8,7 +8,9 @@ import {
 } from '@angular/forms';
 import { RegistroService } from '../../servicios/registro.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AppComponent } from '../../app.component';
+
 
 @Component({
   selector: 'app-registro',
@@ -22,12 +24,15 @@ export class RegistroComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private registroService: RegistroService
+    private registroService: RegistroService,
+    private main: AppComponent,
+    private router: Router
   ) {
     this.formulario = this.formBuilder.group({
       Nombre: ['', Validators.required],
       Email: ['', [Validators.required, Validators.email]],
       Contraseña: ['', Validators.required],
+      repetirContrasena: ['', Validators.required],
       Nick: ['', Validators.required],
       Foto: ['', Validators.required],
       RolID: [2],
@@ -36,6 +41,10 @@ export class RegistroComponent {
 
 
   async enviarRegistro() {
+    if(this.formulario.value.Contraseña !== this.formulario.value.repetirContrasena){
+      this.main.changeModal('error', 'Las contraseñas no coinciden')
+      return
+    }
     if (this.formulario.valid) {
       const formData = new FormData();
       const keys = Object.keys(this.formulario.value);
@@ -61,17 +70,16 @@ export class RegistroComponent {
 
       this.registroService.crearRegistro(formData).subscribe(
         (response) => {
-          console.log('Formulario enviado exitosamente', response);
-          // Aquí puedes redirigir al usuario a otra página o mostrar un mensaje de éxito
+          this.main.changeModal('success', 'Registro exitoso');
+          this.router.navigate(['/login']);
         },
         (error) => {
-          console.error('Error al enviar el formulario', error);
+          this.main.changeModal('error', 'Error al enviar el formulario');
           // Aquí puedes mostrar un mensaje de error al usuario
         }
       );
     } else {
-      console.log('Formulario inválido');
-      // Aquí puedes mostrar mensajes de error específicos para cada campo inválido
+      this.main.changeModal('error', 'Por favor verifique todos los campos');
     }
   }
 }

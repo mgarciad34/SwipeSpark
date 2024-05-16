@@ -1,0 +1,29 @@
+<header class="cabecera">
+  <div class="logo-container">
+    <img src="assets/tinder.png" alt="Logo" class="logo">
+  </div>
+  <nav class="menu-navegacion">
+    <ul>
+      <li><a href="#">Inicio</a></li>
+      <li class="desplegable" (mouseenter)="showSubmenu('usuarios')" (mouseleave)="hideSubmenu()">
+        <a href="#">Usuarios</a>
+        @if (currentSubMenu === 'usuarios') {
+          <ul class="submenu">
+            <li><a href="#">Nuevo Usuario</a></li>
+            <li><a href="#">Gestión de usuarios</a></li>
+          </ul>
+        }
+      </li>
+      <li class="desplegable" (mouseenter)="showSubmenu('eventos')" (mouseleave)="hideSubmenu()">
+        <a href="#">Eventos</a>
+        @if (currentSubMenu === 'eventos') {
+          <ul class="submenu">
+            <li><a href="#">Nuevo evento</a></li>
+            <li><a href="#">Gestión de eventos</a></li>
+          </ul>
+        }
+      </li>
+      <li><a href="#">Cerrar sesión</a></li>
+    </ul>
+  </nav>
+</header>
