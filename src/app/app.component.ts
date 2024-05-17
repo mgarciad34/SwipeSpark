@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 
@@ -12,4 +12,17 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'SwipeSpark';
+  alert = signal('')
+  message = signal('')
+
+  changeModal(alert: string, message: string){
+    this.alert.set(alert)
+    this.message.set(message)
+    setTimeout(() =>{
+      this.alert.set('')
+      this.message.set('')
+    }, 3000);
+  }
+
+
 }
