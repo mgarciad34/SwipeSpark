@@ -1,5 +1,51 @@
-<app-header></app-header>
+<!--* boton que abre el menú de opciones solo disponible en pantallas mobiles-->
+<span id="navegador">
+  <img src="assets/nav.svg" alt="Navegador" />
+</span>
+<!--* boton que abre el menú de opciones solo disponible en pantallas mobiles-->
+
+<!--! sección principal-->
 <main>
 
+<div *ngIf="pantallaActual() === 'Nav' || pantallaActual() === '' " id="Nav">
+<nav id="perfilNav">
+  <span id="botonPerfil">
+    <img id="fotoPerfil" src="{{usuario().Foto}}" alt="Foto de perfil" />
+  </span>
+    <h2 id="nick">Perfil de {{usuario().Nick}}</h2>
+<span (click)="cerrarAplicacion()" id="LogOut">
+<img src="assets/logout.svg" alt="Cerrar sesión" />
+</span>
+</nav>
+</div>
+
+
+
+<div *ngIf="pantallaActual() === 'Swipe' || pantallaActual() === '' "  id="Swipe">
+<div id="likePerfiles">
+<div id="fotoPerfilMatch">
+<img src="{{usuario().Foto}}" alt="Foto de perfil de Match" />
+</div>
+<div id="dataPerfilMatch">
+<span>{{usuario().Nick}}</span>
+</div>
+<div id="seccionLike">
+<span id="butonLike" >
+  <img src="assets/dislike.svg" alt="Dislike" />
+</span>
+<span id="butonLike" >
+  <img src="assets/like.svg" alt="Like" />
+</span>
+</div>
+</div>
+</div>
+
+
 </main>
+<!--! sección principal-->
+
+<!--?Modal de preferencias-->
+
+<!--* footer-->
 <app-footer></app-footer>
+<!--* footer-->

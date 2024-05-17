@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -21,6 +21,7 @@ import { AppComponent } from '../../app.component';
 })
 export class RegistroComponent {
   formulario: FormGroup;
+  eyePass = signal(false)
 
   constructor(
     private formBuilder: FormBuilder,

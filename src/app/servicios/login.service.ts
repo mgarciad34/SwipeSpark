@@ -16,11 +16,11 @@ export class LoginService {
     return this.http.post<any>(this.url, data, { observe: 'response' });
   }
 
-  getUser(id: any): Observable<HttpResponse<any>> {
+  obtenerUsuario(id: any): Observable<HttpResponse<any>> {
     return this.http.get<any>(`${environment.apiUrl}/usuario/${id}`, { observe: 'response' });
   }
 
-  logOut(): void {
+  cerrarAplicacion(): void {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     window.location.reload();

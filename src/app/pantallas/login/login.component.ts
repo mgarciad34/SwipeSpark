@@ -1,6 +1,6 @@
 import { LoginService } from './../../servicios/login.service';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AppComponent } from '../../app.component';
@@ -19,6 +19,7 @@ import { HttpResponse } from '@angular/common/http';
 export class LoginComponent {
   formulario: FormGroup;
   user: any;
+  eyePass = signal(false)
   constructor(
     private formBuilder: FormBuilder,
     private LoginService: LoginService,

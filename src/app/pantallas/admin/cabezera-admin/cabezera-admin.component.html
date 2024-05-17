@@ -5,7 +5,7 @@
   <nav class="menu-navegacion">
     <ul>
       <li><a href="#">Inicio</a></li>
-      <li class="desplegable" (mouseenter)="showSubmenu('usuarios')" (mouseleave)="hideSubmenu()">
+      <li class="desplegable" (mouseenter)="verSubmenu('usuarios')" (mouseleave)="ocultarSubmenu()">
         <a href="#">Usuarios</a>
         @if (currentSubMenu === 'usuarios') {
           <ul class="submenu">
@@ -14,7 +14,7 @@
           </ul>
         }
       </li>
-      <li class="desplegable" (mouseenter)="showSubmenu('eventos')" (mouseleave)="hideSubmenu()">
+      <li class="desplegable" (mouseenter)="verSubmenu('eventos')" (mouseleave)="ocultarSubmenu()">
         <a href="#">Eventos</a>
         @if (currentSubMenu === 'eventos') {
           <ul class="submenu">

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, type OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../servicios/login.service';
 
 @Component({
@@ -15,11 +15,25 @@ import { LoginService } from '../../servicios/login.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InactivoComponent implements OnInit {
-  loginService = inject(LoginService)
-  ngOnInit(): void { }
+  constructor(private loginService: LoginService, private router: Router) {}
+  user = JSON.parse(localStorage.getItem('user') || '{}');
+  ngOnInit(): void {
+    this.loginService.obtenerUsuario(this.user.id).subscribe((response) => {
+      if (response.status === 200) {
+         if (response.body.Estado === 'activo'  || response.body.Estado === 'Activo' ){
+            localStorage.setItem('user', JSON.stringify(response.body));
+            this.router.navigate(['/']);
+         }
+      }
+    } );
+  }
 
 
-  logOut(){
-    this.loginService.logOut();
+
+
+
+
+  cerrarAplicacion(){
+    this.loginService.cerrarAplicacion();
   }
 }

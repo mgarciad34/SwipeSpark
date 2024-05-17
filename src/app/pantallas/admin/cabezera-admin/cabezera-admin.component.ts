@@ -14,14 +14,14 @@ export class CabezeraAdminComponent {
 
   constructor(private router: Router) {}
 
-  showSubmenu(submenuName: string, defaultShow?: boolean): void {
+  verSubmenu(submenuName: string, defaultShow?: boolean): void {
     this.currentSubMenu = submenuName;
     if (defaultShow!== undefined && defaultShow) {
       console.log(`Mostrando submenu ${submenuName} por defecto`);
     }
   }
 
-  hideSubmenu(): void {
+  ocultarSubmenu(): void {
     this.currentSubMenu = null;
   }
 
