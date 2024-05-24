@@ -24,6 +24,9 @@ export class InactivoComponent implements OnInit {
             localStorage.setItem('user', JSON.stringify(response.body));
             this.router.navigate(['/']);
          }
+      }else{
+        localStorage.removeItem('user');
+        this.router.navigate(['/login']);
       }
     } );
   }

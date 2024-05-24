@@ -7,6 +7,11 @@ export interface User {
   Estado?: string;
   Foto?: string;
   RolID?: number;
+  Amigo_amistades?: any
+  amistades?: any
+  inscripcioneseventos?: any
+  mensajes?: any
+  preferencia?: any
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -1,31 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { LoginService } from '../../../servicios/login.service';
 
 @Component({
   selector: 'app-cabezera-admin',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,RouterLink],
   templateUrl: './cabezera-admin.component.html',
   styleUrl: './cabezera-admin.component.css'
 })
 export class CabezeraAdminComponent {
-  currentSubMenu: string | null = null;
+  @Output() cambiandoSubMenu = new EventEmitter<string>();
+  actualSubMenu = signal('eventos');
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private loginService: LoginService) {}
 
-  verSubmenu(submenuName: string, defaultShow?: boolean): void {
-    this.currentSubMenu = submenuName;
-    if (defaultShow!== undefined && defaultShow) {
-      console.log(`Mostrando submenu ${submenuName} por defecto`);
-    }
+  cambiarSubMenu(subMenu: string) {
+    this.cambiandoSubMenu.emit(subMenu);
+    this.actualSubMenu.set(subMenu);
   }
-
-  ocultarSubmenu(): void {
-    this.currentSubMenu = null;
-  }
-
   cerrarAplicacion() {
-    this.router.navigate(['/login']);
+    this.loginService.cerrarAplicacion();
   }
 }

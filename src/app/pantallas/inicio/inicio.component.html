@@ -9,10 +9,10 @@
 
 <div *ngIf="pantallaActual() === 'Nav' || pantallaActual() === '' " id="Nav">
 <nav id="perfilNav">
-  <span id="botonPerfil">
+  <span style="view-transition-name: perfilFoto;" routerLink="/perfil" id="botonPerfil">
     <img id="fotoPerfil" src="{{usuario().Foto}}" alt="Foto de perfil" />
   </span>
-    <h2 id="nick">Perfil de {{usuario().Nick}}</h2>
+    <h2 style="view-transition-name: nick;" id="nick">Perfil de {{usuario().Nick}}</h2>
 <span (click)="cerrarAplicacion()" id="LogOut">
 <img src="assets/logout.svg" alt="Cerrar sesión" />
 </span>
@@ -40,12 +40,21 @@
 </div>
 </div>
 
-
+@if(usuario().preferencia === null || usuario().preferencia === undefined || usuario().preferencia.length === 0 && listo()){
+  <app-modal-preferencias-usuario
+  *ngIf="modalPreferencias()"
+  [usuario]="usuario()"
+  (cerrarModal)="cambiandoValorModal($event)"
+  (actualizarUsuario)="obtenerUsuario()"
+  />
+}
 </main>
 <!--! sección principal-->
 
 <!--?Modal de preferencias-->
 
+
 <!--* footer-->
 <app-footer></app-footer>
 <!--* footer-->
+

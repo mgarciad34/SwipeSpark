@@ -24,7 +24,7 @@ export const inactiveGuard: CanActivateFn = async (route, state) => {
           return response = true;
         }
     } else {
-      loginS.logOut();
+      loginS.cerrarAplicacion();
       await router.navigate(['/login']);
       return response = false;
     }

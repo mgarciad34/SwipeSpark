@@ -17,7 +17,7 @@ export class LoginService {
   }
 
   obtenerUsuario(id: any): Observable<HttpResponse<any>> {
-    return this.http.get<any>(`${environment.apiUrl}/usuario/${id}`, { observe: 'response' });
+      return this.http.get<any>(`${environment.apiUrl}/usuario/${id}`, { observe: 'response' });
   }
 
   cerrarAplicacion(): void {

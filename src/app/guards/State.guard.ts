@@ -24,7 +24,7 @@ export const stateGuard: CanActivateFn = async (route, state) => {
           return response = false;
         }
     } else {
-      loginS.logOut();
+      loginS.cerrarAplicacion();
       await router.navigate(['/login']);
       return response = false;
     }

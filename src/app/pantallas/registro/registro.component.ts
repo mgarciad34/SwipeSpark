@@ -75,7 +75,11 @@ export class RegistroComponent {
           this.router.navigate(['/login']);
         },
         (error) => {
-          this.main.changeModal('error', 'Error al enviar el formulario');
+          if (error.status === 400) {
+            this.main.changeModal('error', 'El correo ya está en uso');
+          } else {
+            this.main.changeModal('error', 'Ha ocurrido un error'+ error.error.message);
+          }
           // Aquí puedes mostrar un mensaje de error al usuario
         }
       );

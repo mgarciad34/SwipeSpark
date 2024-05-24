@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -11,13 +11,13 @@ export class RegistroService {
 
   constructor(private http: HttpClient) {}
 
-  crearRegistro(registro: FormData): Observable<any> {
+  crearRegistro(registro: FormData): Observable<HttpResponse<any>> {
 
     var json: { [key: string]: any } = {};
     registro.forEach(function (value, key) {
         json[key] = value
     }
     );
-    return this.http.post(this.url, json);
+    return this.http.post(this.url, json, { observe: 'response' });
   }
 }
