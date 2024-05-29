@@ -1,13 +1,13 @@
 export interface User {
+  [key: string]: any;
   id?: number;
-  Nombre?: string;
-  Email?: string;
-  Contrasena?: string;
-  Nick?: string;
-  Estado?: string;
-  Foto?: string;
-  RolID?: number;
-  Amigo_amistades?: any
+  nombre?: string;
+  email?: string;
+  contrasena?: string;
+  nick?: string;
+  estado?: string;
+  foto?: string;
+  rolID?: number;
   amistades?: any
   inscripcioneseventos?: any
   mensajes?: any

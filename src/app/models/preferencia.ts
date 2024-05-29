@@ -1,5 +1,8 @@
 export interface Preferencia{
-  Tipo?: any;
-  Valor: any;
-  UsuarioID?: any;
+  id?: number;
+  tipo?: any;
+  valor: any;
+  usuarioID?: any;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

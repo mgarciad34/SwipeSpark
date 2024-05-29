@@ -28,8 +28,8 @@ export class LoginComponent {
 
   ) {
     this.formulario = this.formBuilder.group({
-      Email: ['', [Validators.required, Validators.email]],
-      Contraseña: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      contrasena: ['', Validators.required],
     });
   }
 
@@ -37,10 +37,9 @@ export class LoginComponent {
   login() {
     if (this.formulario.valid) {
       const data = {
-        Email: this.formulario.value.Email,
-        Contraseña: this.formulario.value.Contraseña
+        email: this.formulario.value.email,
+        contrasena: this.formulario.value.contrasena
       };
-
       this.LoginService.login(data).subscribe(
         (response: HttpResponse<any>) => {
           if (response.status === 200) {

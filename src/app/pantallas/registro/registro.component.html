@@ -3,19 +3,19 @@
      <form [formGroup]="formulario" (ngSubmit)="enviarRegistro()">
        <div class="row">
          <div class="form-group">
-           <label for="Nombre">Nombre:</label>
-           <input type="text" id="nombre" formControlName="Nombre" required />
+           <label for="nombre">Nombre:</label>
+           <input type="text" id="nombre" formControlName="nombre" required />
          </div>
          <div class="form-group">
-           <label for="Email">Correo electrónico:</label>
-           <input type="email" id="email" formControlName="Email" required />
+           <label for="email">Correo electrónico:</label>
+           <input autocomplete="username" type="email" id="email" formControlName="email" required />
          </div>
        </div>
        <div class="row">
          <div class="form-group">
-           <label for="Contraseña">Contraseña:</label>
+           <label for="contrasena">Contraseña:</label>
            <div style="position: relative;">
-            <input [type]="eyePass() === true ? 'text' : 'password'" id="contraseña" formControlName="Contraseña" required/>
+            <input [type]="eyePass() === true ? 'text' : 'password'" id="contrasena" formControlName="contrasena" required/>
             <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;" (click)="eyePass.set(!eyePass())">
               @if(eyePass() === true){
                 <svg  xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24">
@@ -34,11 +34,11 @@
 
          </div>
          <div class="form-group">
-           <label for="repetir-contraseña">Confirmar contraseña:</label>
+           <label for="repetir-contrasena">Confirmar contrasena:</label>
            <div style="position: relative;">
             <input
             [type]="eyePass() === true ? 'text' : 'password'"
-            id="repetir-contraseña"
+            id="repetir-contrasena"
             formControlName="repetirContrasena"
             required
           />
@@ -62,12 +62,12 @@
        <div class="row">
          <div class="form-group">
            <label for="nick">Nick:</label>
-           <input type="text" id="nick" formControlName="Nick" required />
+           <input type="text" id="nick" formControlName="nick" required />
          </div>
          <div class="row">
            <div class="form-group">
              <label for="foto-perfil">Foto de perfil:</label>
-             <input type="file" id="foto-perfil" formControlName="Foto" accept="image/png, image/jpeg, image/jpg"/>
+             <input type="file" id="foto-perfil" formControlName="foto" accept="image/png, image/jpeg, image/jpg"/>
            </div>
          </div>
        </div>

@@ -21,6 +21,10 @@ export class UsuariosService {
     return this.http.get<any>(`${this.urlUsuario}/${id}`, { observe: 'response' });
   }
 
+  obtenerRecomendaciones(id: any, cantidad:any , data:any): Observable<HttpResponse<any>> {
+    return this.http.post<any>(`${this.urlUsuarios}/recomendaciones/${cantidad}/${id}`,data, { observe: 'response' });
+  }
+
   actualizarUsuario(id: any, data: any): Observable<HttpResponse<any>> {
     return this.http.put<any>(`${this.urlUsuario}/${id}`, data, { observe: 'response' });
   }
@@ -35,5 +39,17 @@ export class UsuariosService {
 
   compararContraseñas(plainPassword: string, hashedPassword: string): boolean {
     return bcrypt.compareSync(plainPassword, hashedPassword);
+  }
+
+  like(data:any): Observable<HttpResponse<any>> {
+    return this.http.post<any>(`${this.urlUsuario}/like`, data , { observe: 'response' });
+  }
+
+  dislike(data:any): Observable<HttpResponse<any>> {
+    return this.http.post<any>(`${this.urlUsuario}/dislike`, data , { observe: 'response' });
+  }
+
+  verificarAmistad(data:any): Observable<HttpResponse<any>> {
+    return this.http.post<any>(`${this.urlUsuario}/verificarAmistad`, data , { observe: 'response' });
   }
 }

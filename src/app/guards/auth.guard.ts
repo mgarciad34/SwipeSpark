@@ -12,8 +12,8 @@ export const authGuard: CanActivateFn  = async (route, _state) => {
 
   if (user && token) {
     if (loginS.verificarExpiracionToken(token)) {
-        if(user.Estado === 'Activo' || user.Estado === 'activo'){
-          if(user.RolID === 1){
+        if(user.estado === 'Activo' || user.estado === 'activo'){
+          if(user.rolID === 1){
             await router.navigate(['admin/dashboard']);
             return response = false;
           }else{

@@ -18,11 +18,11 @@ import { Evento } from '../../../models/eventos';
 })
 export class ModalCrearEventoComponent implements OnInit {
   @Input() evento:Evento ={
-    Nombre: '',
-    Descripcion: '',
-    FechaRealizacion: null,
-    FechaCierreInscripcion: null,
-    Geolocalizacion: ''
+    nombre: '',
+    descripcion: '',
+    fechaRealizacion: null,
+    fechaCierreInscripcion: null,
+    geolocalizacion: ''
   };
   @Output() cerrarModal = new EventEmitter<boolean>();
   @Output() guardar = new EventEmitter<boolean>();

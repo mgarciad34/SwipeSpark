@@ -30,7 +30,8 @@ export class ModalCambiarPassComponent implements OnInit {
   }
 
   guardarCambios() {
-    const esIgual =this.usuariosService.compararContraseñas(this.passActual(), this.usuario.Contraseña)
+    const esIgual =this.usuariosService.compararContraseñas(this.passActual(), this.usuario.contrasena)
+    const esIgualAlaNueva = this.usuariosService.compararContraseñas(this.nuevaPass(), this.usuario.contrasena)
     if(!esIgual){
       this.main.changeModal('error', 'La contraseña actual no es correcta')
       return
@@ -41,8 +42,11 @@ export class ModalCambiarPassComponent implements OnInit {
     this.nuevaPass() === undefined || this.confirmarPass() === undefined){
       this.main.changeModal('error', 'Las campos no pueden ser vacios')
       return
+    }else if(esIgualAlaNueva){
+      this.main.changeModal('error', 'La nueva contraseña no puede ser igual a la actual')
+      return
     }
-    this.usuariosService.cambiarContraseña(this.usuario.id, {Contraseña: this.nuevaPass()}).subscribe((res) => {
+    this.usuariosService.cambiarContraseña(this.usuario.id, {contrasena: this.nuevaPass()}).subscribe((res) => {
         if(res.status === 200){
           this.main.changeModal('success', 'Contraseña actualizada correctamente')
           this.cerrarModal.emit(true)

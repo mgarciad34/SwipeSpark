@@ -26,7 +26,7 @@ export class RecuperarComponent {
         return;
       }else{
         let body= {
-          Email: this.email()
+          email: this.email()
         }
         this.recuperarServicio.recuperar(body).subscribe((response) => {
           if(response.status === 200){

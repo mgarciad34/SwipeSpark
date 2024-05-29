@@ -2,7 +2,7 @@
   <span routerLink="/" id="atras">
     <img src="assets/arrow.svg" alt="Cerrar sesión" />
   </span>
-    <h2 style="view-transition-name: nick;" id="nick">Editar perfil de {{usuario().Nick}}</h2>
+    <h2 style="view-transition-name: nick;" id="nick">Editar perfil de {{usuario().nick}}</h2>
 <span (click)="cerrarAplicacion()" id="LogOut">
 <img src="assets/logout.svg" alt="Cerrar sesión" />
 </span>
@@ -12,7 +12,7 @@
   <div id="form">
     <div id="containerFoto">
       <span style="view-transition-name: perfilFoto; overflow: hidden; z-index: 100;"id="botonPerfil">
-        <img width="100px" height="100px" id="fotoPerfil" src="{{usuario().Foto}}" alt="Foto de perfil" />
+        <img width="100px" height="100px" id="fotoPerfil" src="{{usuario().foto}}" alt="Foto de perfil" />
       </span>
       <span (click)="modalCambiarFoto.set(true)" style="position: absolute; right: -5px; z-index: 100; cursor: pointer; bottom: -5px; background-color: white; border-radius: 100%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border-color: brown; border: 2px solid brown;"><svg style="object-fit:cover; margin:0,auto,0,auto" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24">
         <path fill="#ff6f61" d="M16.477 3.004c.167.015.24.219.12.338l-8.32 8.32a.75.75 0 0 0-.195.34l-1 3.83a.75.75 0 0 0 .915.915l3.829-1a.751.751 0 0 0 .34-.196l8.438-8.438a.198.198 0 0 1 .339.12a45.723 45.723 0 0 1-.06 10.073c-.223 1.905-1.754 3.4-3.652 3.613a47.468 47.468 0 0 1-10.461 0c-1.899-.213-3.43-1.708-3.653-3.613a45.672 45.672 0 0 1 0-10.611C3.34 4.789 4.871 3.294 6.77 3.082a47.512 47.512 0 0 1 9.707-.078" />
@@ -22,16 +22,16 @@
 
     <div id="editar">
 
-      <input   type="text" id="inputFalso" placeholder="Ingresa el nick"  (ngModelChange)="cambio.set(true)" [(ngModel)]="usuario().Nick" />
+      <input   type="text" id="inputFalso" placeholder="Ingresa el nick"  (ngModelChange)="cambio.set(true)" [(ngModel)]="usuario().nick" />
 
       <div id="miniForm">
         <span id="spanMini">Nombre:</span>
-        <input   type="text" id="inputFalsoCampo" placeholder="Ingresa el nick"  (ngModelChange)="cambio.set(true)" [(ngModel)]="usuario().Nombre" />
+        <input   type="text" id="inputFalsoCampo" placeholder="Ingresa el nick"  (ngModelChange)="cambio.set(true)" [(ngModel)]="usuario().nombre" />
       </div>
 
       <div id="miniForm">
         <span id="spanMini">Email:</span>
-        <input   type="text" id="inputFalsoCampo" placeholder="Ingresa el nick"  (ngModelChange)="cambio.set(true)" [(ngModel)]="usuario().Email" />
+        <input   type="text" id="inputFalsoCampo" placeholder="Ingresa el nick"  (ngModelChange)="cambio.set(true)" [(ngModel)]="usuario().email" />
       </div>
       <div id="miniForm">
         <span id="spanMini">Contraseña:</span>
@@ -40,18 +40,19 @@
       <br>
       <span style="display: flex; justify-content: center; font-weight: bold; width: 100%;">- Preferencias -</span>
       <br>
-      @for(preferencia of preferencias(); track preferencia.UsuarioID; ){
+      @for(preferencia of preferencias(); track preferencia.usuarioID; ){
         <div id="miniForm">
-          <span id="spanMini">{{preferencia.Tipo}}</span>
+          <span id="spanMini">{{preferencia.tipo}}</span>
 
-          @if(preferencia.Tipo === 'relacion' || preferencia.Tipo === 'hijos' || preferencia.Tipo === 'interes'){
-            <select id="inputFalsoCampo" (ngModelChange)="cambio.set(true)" [(ngModel)]="preferencia.Valor">
-              @if(preferencia.Tipo === 'relacion'){
+          @if(preferencia.tipo === 'relacion' || preferencia.tipo === 'hijos' || preferencia.tipo === 'interes'){
+            <select id="inputFalsoCampo" (ngModelChange)="cambio.set(true)" [(ngModel)]="preferencia.valor">
+              @if(preferencia.tipo === 'relacion'){
                 <option value="Seria">Seria</option>
                 <option value="Esporádica">Esporádica</option>
-              }@else if(preferencia.Tipo === 'hijos'){
+              }@else if(preferencia.tipo === 'hijos'){
                 <option value="Tengo hijos">Tengo hijos</option>
                 <option value="Quiero hijos">Quiero hijos</option>
+                <option value="No quiero hijos">No quiero hijos</option>
               }@else{
                 <option value="Hombres">Hombres</option>
                 <option value="Mujeres">Mujeres</option>
@@ -60,8 +61,8 @@
             </select>
           }@else{
             <div id="range">
-              <input  (ngModelChange)="cambio.set(true)"  type="range" min="0" max="100" id="inputFalsoCampo" placeholder="Ingresa el {{preferencia.Tipo}}" [(ngModel)]="preferencia.Valor" />
-              <label>Valor: {{preferencia.Valor}}</label>
+              <input  (ngModelChange)="cambio.set(true)"  type="range" min="0" max="100" id="inputFalsoCampo" placeholder="Ingresa el {{preferencia.tipo}}" [(ngModel)]="preferencia.valor" />
+              <label>valor: {{preferencia.valor}}</label>
             </div>
 
           }

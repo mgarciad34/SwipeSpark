@@ -29,11 +29,11 @@ export class ModalCambiarFotoComponent implements OnInit {
       this.main.changeModal('error', 'Debes seleccionar una foto');
       return;
     }
-    if(this.usuario.Foto === this.foto()){
+    if(this.usuario.foto === this.foto()){
       this.main.changeModal('error', 'Debes seleccionar una foto diferente');
       return;
     }
-    this.usuario.Foto = this.foto();
+    this.usuario.foto = this.foto();
     this.usuarioService.actualizarUsuario(this.usuario.id, this.usuario).subscribe((res) => {
       if(res.status === 200){
         this.main.changeModal('success', 'Foto actualizada correctamente');
@@ -53,10 +53,19 @@ export class ModalCambiarFotoComponent implements OnInit {
 
   cambiarFoto($event: any) {
     const file = $event.target.files[0];
+    const maxSize = 5 * 1024 * 1024; // 5MB en bytes
+
+    if (file.size > maxSize) {
+      this.main.changeModal('error', 'La imagen es demasiado grande, de lo permitido es 5MB ');
+      $event.target.value = '';
+      return; // Salir de la función si el archivo es demasiado grande
+    }
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
       this.foto.set(reader.result as string);
     };
   }
+
 }

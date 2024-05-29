@@ -4,13 +4,13 @@
   <form [formGroup]="formulario" (ngSubmit)="login()">
     <div class="form-group">
       <label for="email">Correo electrónico:</label>
-      <input autocomplete="email" type="email" id="email" formControlName="Email" required />
+      <input autocomplete="email" type="email" id="email" formControlName="email" required />
 
     </div>
     <div class="form-group">
-      <label for="contraseña">Contraseña:</label>
+      <label for="contrasena">Contraseña:</label>
       <div style="position: relative;">
-        <input autocomplete="new-password" [type]="eyePass() === true ? 'text' : 'password'" id="contraseña" formControlName="Contraseña" required/>
+        <input autocomplete="new-password" [type]="eyePass() === true ? 'text' : 'password'" id="contraseña" formControlName="contrasena" required/>
         <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;" (click)="eyePass.set(!eyePass())">
           @if(eyePass() === true){
             <svg  xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24">

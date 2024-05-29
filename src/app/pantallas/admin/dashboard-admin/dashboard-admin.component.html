@@ -34,13 +34,13 @@
   <input type="text" id="buscador" placeholder="Buscar usuario" [(ngModel)]="filter">
   <div id="contenedor">
     @for(usuario of usuarios() | appFiltroTexto:filter(); track usuario.id){
-      @if(usuario.Email === usuarioSesion().Email ){
+      @if(usuario.email === usuarioSesion().email ){
 
       }@else{
         <div id="columnaUsuario">
-          <span style="width: 100%;">{{usuario.Nombre}}</span>
-          <span style="width: 100%;">{{usuario.Email}}</span>
-          <span style="width: 100%;">{{usuario.Estado}}</span>
+          <span style="width: 100%;">{{usuario.nombre}}</span>
+          <span style="width: 100%;">{{usuario.email}}</span>
+          <span style="width: 100%;">{{usuario.estado}}</span>
           <div id="operaciones">
             <span (click)="usuarioActual.set(usuario); modalUsuario.set(!modalUsuario())" id="operacion">
               <img src="assets/edit.svg">

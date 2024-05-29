@@ -14,8 +14,12 @@ export class RegistroService {
   crearRegistro(registro: FormData): Observable<HttpResponse<any>> {
 
     var json: { [key: string]: any } = {};
-    registro.forEach(function (value, key) {
+    registro.forEach((value, key) =>{
+      if(key === 'repetirContrasena'){
+        null
+      }else{
         json[key] = value
+      }
     }
     );
     return this.http.post(this.url, json, { observe: 'response' });

@@ -52,9 +52,9 @@ export class ModalPreferenciasUsuarioComponent implements OnInit {
         return;
       }else{
         const preferencia:Preferencia = {
-          Tipo: key,
-          Valor: this.preferencias()[key],
-          UsuarioID: this.usuario.id
+          tipo: key,
+          valor: this.preferencias()[key],
+          usuarioID: this.usuario.id
         }
         this.preferenciasArray.push(preferencia)
       }

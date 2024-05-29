@@ -1,11 +1,11 @@
 export interface Evento
 {
   id?: number;
-  Nombre?: string;
-  FechaRealizacion?: Date | null;
-  FechaCierreInscripcion?: Date | null;
-  Geolocalizacion?: string;
-  Descripcion?: string;
+  nombre?: string;
+  fechaRealizacion?: Date | null;
+  fechaCierreInscripcion?: Date | null;
+  geolocalizacion?: string;
+  descripcion?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

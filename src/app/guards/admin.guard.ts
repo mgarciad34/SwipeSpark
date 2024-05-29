@@ -12,8 +12,8 @@ export const adminGuard: CanActivateFn = async (route, state) => {
 
   if (user && token) {
     if (loginS.verificarExpiracionToken(token)) {
-        if(user.Estado === 'Activo' || user.Estado === 'activo'){
-          if(user.RolID === 1){
+        if(user.estado === 'Activo' || user.estado === 'activo'){
+          if(user.rolID === 1){
             return response = true;
           }else{
 

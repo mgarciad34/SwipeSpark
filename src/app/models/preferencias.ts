@@ -1,9 +1,9 @@
 export interface Preferencias {
-  [key: string]: any; // This is the index signature
+  [key: string]: any;
   relacion?:string | null;
   deportivos?:number | null;
   artisticos?:number | null;
   politicos?:number | null;
-  hijos?:boolean | null;
+  hijos?:string | null;
   interes?:string | null;
 }

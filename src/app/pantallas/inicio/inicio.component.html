@@ -10,9 +10,9 @@
 <div *ngIf="pantallaActual() === 'Nav' || pantallaActual() === '' " id="Nav">
 <nav id="perfilNav">
   <span style="view-transition-name: perfilFoto;" routerLink="/perfil" id="botonPerfil">
-    <img id="fotoPerfil" src="{{usuario().Foto}}" alt="Foto de perfil" />
+    <img id="fotoPerfil" src="{{usuario().foto}}" alt="Foto de perfil" />
   </span>
-    <h2 style="view-transition-name: nick;" id="nick">Perfil de {{usuario().Nick}}</h2>
+    <h2 style="view-transition-name: nick;" id="nick">Perfil de {{usuario().nick}}</h2>
 <span (click)="cerrarAplicacion()" id="LogOut">
 <img src="assets/logout.svg" alt="Cerrar sesión" />
 </span>
@@ -22,22 +22,97 @@
 
 
 <div *ngIf="pantallaActual() === 'Swipe' || pantallaActual() === '' "  id="Swipe">
-<div id="likePerfiles">
-<div id="fotoPerfilMatch">
-<img src="{{usuario().Foto}}" alt="Foto de perfil de Match" />
-</div>
-<div id="dataPerfilMatch">
-<span>{{usuario().Nick}}</span>
-</div>
-<div id="seccionLike">
-<span id="butonLike" >
-  <img src="assets/dislike.svg" alt="Dislike" />
-</span>
-<span id="butonLike" >
-  <img src="assets/like.svg" alt="Like" />
-</span>
-</div>
-</div>
+  <div id="botonesDePaginasSwipe">
+    <span (click)="pageSwipe.set('Dislikes')" [style]="pageSwipe() === 'Dislikes' ? 'background-color: #ff6f61; color:white' : 'background-color: white ;'" id="botonSwipe">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2m5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12z" />
+      </svg>
+    </span>
+    <span (click)="pageSwipe.set('Recomendaciones')" [style]="pageSwipe() === 'Recomendaciones' ? 'background-color: #ff6f61; color:white' : 'background-color: white;'"  id="botonSwipe">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+        <path fill="currentColor" fill-rule="evenodd" d="M11 2a9 9 0 1 0 5.618 16.032l3.675 3.675a1 1 0 0 0 1.414-1.414l-3.675-3.675A9 9 0 0 0 11 2m-6 9a6 6 0 1 1 12 0a6 6 0 0 1-12 0" clip-rule="evenodd" />
+      </svg>
+    </span>
+    <span (click)="pageSwipe.set('Likes')" [style]="pageSwipe() === 'Likes' ? 'background-color: #ff6f61; color:white' : 'background-color: white;'"  id="botonSwipe">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53z" />
+      </svg>
+    </span>
+  </div>
+@if(pageSwipe() === 'Dislikes' && listo()){
+  @if(dislikes()[actualIndiceDislike()]?.foto !== undefined && dislikes()[actualIndiceDislike()]?.foto !== null && dislikes()[actualIndiceDislike()]?.foto !== '' && listo()){
+    <div id="likePerfiles">
+      <div id="fotoPerfilMatch">
+      <img src="{{dislikes()[actualIndiceDislike()]?.foto}}" alt="Foto de perfil de Match" />
+      </div>
+      <div id="dataPerfilMatch">
+      <span>{{dislikes()[actualIndiceDislike()]?.nick}}</span>
+      </div>
+      <div id="seccionLike">
+      <span (click)="dislike()" (mouseenter)="rotarLikePerfiles('dislike')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+        <img src="assets/dislike.svg" alt="Dislike" />
+      </span>
+      <span (click)="like()" (mouseenter)="rotarLikePerfiles('like')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+        <img src="assets/like.svg" alt="Like" />
+      </span>
+      </div>
+      </div>
+  }@else{
+    <div style="text-align: center;" id="likePerfiles">
+      No hay más perfiles para mostrar
+    </div>
+  }
+}
+@if(pageSwipe() === 'Recomendaciones' && listo()){
+  @if(actualRecomendacion()?.foto !== undefined && actualRecomendacion()?.foto !== null && actualRecomendacion()?.foto !== '' && listo()){
+    <div id="likePerfiles">
+      <div id="fotoPerfilMatch">
+      <img src="{{actualRecomendacion()?.foto}}" alt="Foto de perfil de Match" />
+      </div>
+      <div id="dataPerfilMatch">
+      <span>{{actualRecomendacion()?.nick}}</span>
+      </div>
+      <div id="seccionLike">
+      <span (click)="dislike()" (mouseenter)="rotarLikePerfiles('dislike')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+        <img src="assets/dislike.svg" alt="Dislike" />
+      </span>
+      <span (click)="like()" (mouseenter)="rotarLikePerfiles('like')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+        <img src="assets/like.svg" alt="Like" />
+      </span>
+      </div>
+      </div>
+  }@else{
+    <div style="text-align: center;" id="likePerfiles">
+      No hay más perfiles para mostrar
+    </div>
+  }
+}
+@if(pageSwipe() === 'Likes' && listo()){
+  @if(solicitudesEnviadas()[actualIndiceLike()]?.foto !== undefined && solicitudesEnviadas()[actualIndiceLike()]?.foto !== null && solicitudesEnviadas()[actualIndiceLike()]?.foto !== '' && listo()){
+    <div id="likePerfiles">
+      <div id="fotoPerfilMatch">
+      <img src="{{solicitudesEnviadas()[actualIndiceLike()]?.foto}}" alt="Foto de perfil de Match" />
+      </div>
+      <div id="dataPerfilMatch">
+      <span>{{solicitudesEnviadas()[actualIndiceLike()]?.nick}}</span>
+      </div>
+      <div id="seccionLike">
+      <span (click)="dislike()" (mouseenter)="rotarLikePerfiles('dislike')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+        <img src="assets/dislike.svg" alt="Dislike" />
+      </span>
+      <span (click)="like()" (mouseenter)="rotarLikePerfiles('like')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+        <img src="assets/like.svg" alt="Like" />
+      </span>
+      </div>
+      </div>
+  }@else{
+    <div style="text-align: center;" id="likePerfiles">
+      No hay más perfiles para mostrar
+    </div>
+  }
+}
+
+
 </div>
 
 @if(usuario().preferencia === null || usuario().preferencia === undefined || usuario().preferencia.length === 0 && listo()){
