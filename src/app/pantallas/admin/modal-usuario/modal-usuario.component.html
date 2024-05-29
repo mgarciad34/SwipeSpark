@@ -1,0 +1,15 @@
+<dialog open>
+<span (click)="cerrarModalFn()" id="close">
+<img src="assets/close.svg">
+</span>
+<h2>Editar usuario</h2>
+<div id="form">
+@for(campo of dataFiltrada() | keyvalue; track campo.key){
+  <div id="campo">
+    <label for="{{campo.key}}">{{campo.key}}</label>
+    <input style="width: 100%;" type="text" id="{{campo.key}}" [(ngModel)]="usuario[campo.key]">
+    </div>
+}
+<button (click)="guardarCambios()">Guardar cambios</button>
+</div>
+</dialog>

@@ -1,0 +1,16 @@
+<dialog open>
+  <h2>Cambiar contraseña</h2>
+  <div id="form">
+  <div id="miniForm">
+    <input   type="text" id="inputCampo" placeholder="Ingresa la contraseña actual"  [(ngModel)]="passActual" />
+  </div>
+  <div id="miniForm">
+    <input   type="text" id="inputCampo" placeholder="Ingresa la nueva contraseña"  [(ngModel)]="nuevaPass" />
+  </div>
+  <div id="miniForm">
+    <input   type="text" id="inputCampo" placeholder="Confirma la nueva contraseña"  [(ngModel)]="confirmarPass" />
+  </div>
+  <button (click)="guardarCambios()">Guardar cambios</button>
+  <button style="background-color: rgba(165, 42, 42, 0.394);" (click)="cerrarModal.emit(true)">Cancelar</button>
+  </div>
+  </dialog>

@@ -1,0 +1,73 @@
+:host {
+  display: block;
+}
+
+dialog {
+  width: 80%;
+  height: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 2px solid black;
+  border-radius: 20px;
+  display: fixed;
+  justify-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 1280px) {
+  dialog {
+    max-width: 700px;
+    max-height: auto;
+  }
+
+}
+
+
+h2 {
+  text-align: center;
+  margin: 0;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #ff6f61;
+  color: white;
+  border-radius: 20px 20px 0 0;
+  font-size: 1.5em;
+}
+
+#close{
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  cursor: pointer;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+button{
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  cursor: pointer;
+  margin: 0 auto, 0 auto;
+}
+
+#inputCampo{
+  width: 100%;
+  height: 100%;
+}
+
+#miniForm{
+  padding: 10px;
+  min-height: 50px;
+}

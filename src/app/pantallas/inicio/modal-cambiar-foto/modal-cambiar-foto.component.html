@@ -1,0 +1,14 @@
+<dialog open>
+  <h2>Cambiar foto de perfil</h2>
+  <div id="form">
+    <input type="file" (change)="cambiarFoto($event)" />
+    <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 120px; min-height: 150px; border: 2px solid black;">
+      @if(foto()){
+        <img style="max-width: 100px;" [src]="foto()" alt="Foto de perfil" />
+        <p>¿Esta te parece bien?</p>
+      }@else{}
+    </div>
+  <button (click)="guardarCambios()">Guardar cambios</button>
+  <button style="background-color: rgba(165, 42, 42, 0.394);" (click)="cerrarModal.emit(true)">Cancelar</button>
+  </div>
+  </dialog>

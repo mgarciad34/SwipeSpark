@@ -1,29 +1,12 @@
 <header class="cabecera">
   <div class="logo-container">
-    <img src="assets/tinder.png" alt="Logo" class="logo">
+    <a routerLink="/"><img src="assets/tinder.png" alt="Logo" class="logo"></a>
   </div>
-  <nav class="menu-navegacion">
-    <ul>
-      <li><a href="#">Inicio</a></li>
-      <li class="desplegable" (mouseenter)="verSubmenu('usuarios')" (mouseleave)="ocultarSubmenu()">
-        <a href="#">Usuarios</a>
-        @if (currentSubMenu === 'usuarios') {
-          <ul class="submenu">
-            <li><a href="#">Nuevo Usuario</a></li>
-            <li><a href="#">Gestión de usuarios</a></li>
-          </ul>
-        }
-      </li>
-      <li class="desplegable" (mouseenter)="verSubmenu('eventos')" (mouseleave)="ocultarSubmenu()">
-        <a href="#">Eventos</a>
-        @if (currentSubMenu === 'eventos') {
-          <ul class="submenu">
-            <li><a href="#">Nuevo evento</a></li>
-            <li><a href="#">Gestión de eventos</a></li>
-          </ul>
-        }
-      </li>
-      <li><a href="#">Cerrar sesión</a></li>
-    </ul>
+  <nav  class="menu-navegacion">
+      <span [style]="actualSubMenu() === 'eventos' ? 'color:black; border:2px solid; padding:5px; border-radius:10px' : 'padding:5px'" (click)="cambiarSubMenu('eventos')" id="pages">Eventos</span>
+      <span [style]="actualSubMenu() === 'usuarios' ? 'color:black; border:2px solid; padding:5px; border-radius:10px' : 'padding:5px'"  (click)="cambiarSubMenu('usuarios')" id="pages">Usuarios</span>
   </nav>
+  <span (click)="cerrarAplicacion()" id="cerrar">
+    <img src="assets/logout.svg">
+  </span>
 </header>

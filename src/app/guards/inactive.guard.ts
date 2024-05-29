@@ -12,8 +12,8 @@ export const inactiveGuard: CanActivateFn = async (route, state) => {
 
   if (user && token) {
     if (loginS.verificarExpiracionToken(token)) {
-        if(user.Estado === 'Activo' || user.Estado === 'activo'){
-          if(user.RolID === 1){
+        if(user.estado === 'Activo' || user.estado === 'activo'){
+          if(user.rolID === 1){
             await router.navigate(['admin/dashboard']);
             return response = false;
           }else{
@@ -24,7 +24,7 @@ export const inactiveGuard: CanActivateFn = async (route, state) => {
           return response = true;
         }
     } else {
-      loginS.logOut();
+      loginS.cerrarAplicacion();
       await router.navigate(['/login']);
       return response = false;
     }

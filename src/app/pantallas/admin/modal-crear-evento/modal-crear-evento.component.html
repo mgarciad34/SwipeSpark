@@ -1,0 +1,32 @@
+<dialog open>
+  <span (click)="cerrarModalFn()" id="close">
+  <img src="assets/close.svg">
+  </span>
+  <h2>Crear evento</h2>
+  <div id="form">
+
+    <div id="campo">
+      <label >Nombre</label>
+      <input style="width: 100%;" type="text"  [(ngModel)]="evento.nombre">
+    </div>
+    <div id="campo">
+      <label >Descripción</label>
+      <input style="width: 100%;" type="text"  [(ngModel)]="evento.descripcion">
+    </div>
+    <div id="campo">
+      <label >Geolocalización</label>
+      <input style="width: 100%;" type="text"  [(ngModel)]="evento.geolocalizacion">
+    </div>
+    <div id="campo">
+      <label >Fecha de Realización</label>
+      <input style="width: 100%;" type="date"  [(ngModel)]="evento.fechaRealizacion">
+    </div>
+    <div id="campo">
+      <label >Fecha de Cierre</label>
+      <input style="width: 100%;" type="date"  [(ngModel)]="evento.fechaCierreInscripcion">
+    </div>
+
+
+  <button (click)="guardarCambios()">Crear</button>
+  </div>
+  </dialog>

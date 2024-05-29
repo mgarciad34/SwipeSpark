@@ -1,0 +1,54 @@
+<dialog open>
+  <h2>Por favor, completa tus preferencias!</h2>
+  <div id="form">
+
+    <div id="campo">
+      <label >¿Tipo de relación deseada?</label>
+      <select id="select" [(ngModel)]="preferencias().relacion" name="tipoRelacion">
+        <option value="Seria">Seria</option>
+        <option value="Esporádica">Esporádica</option>
+      </select>
+    </div>
+    <div id="campo">
+      <label style="font-size: large; font-weight: bold; text-align: center;" >Ahora evaluaremos sus preferencias con rango del 0 a 100</label>
+    </div>
+    <div id="campo">
+      <label >¿Deportivos?</label>
+      <div id="rango">
+        <input id="rangoInput" type="range" min="0" max="100" [(ngModel)]="preferencias().deportivos">
+        <label>Valor: {{preferencias().deportivos}}</label>
+      </div>
+    </div>
+    <div id="campo">
+      <label >¿Artísticos?</label>
+      <div id="rango">
+        <input id="rangoInput" type="range" min="0" max="100" [(ngModel)]="preferencias().artisticos">
+        <label>Valor: {{preferencias().artisticos}}</label>
+      </div>
+    </div>
+    <div id="campo">
+      <label >¿Politicos?</label>
+      <div id="rango">
+        <input id="rangoInput" type="range" min="0" max="100" [(ngModel)]="preferencias().politicos">
+        <label>Valor: {{preferencias().politicos}}</label>
+      </div>
+    </div>
+    <div id="campo">
+      <label >¿Tiene/quiere hijos?</label>
+      <select id="select" [(ngModel)]="preferencias().hijos" name="tipoHijos">
+        <option value="Tengo hijos">Tengo hijos</option>
+        <option value="Quiero hijos">Quiero hijos</option>
+        <option value="No quiero hijos">No quiero hijos</option>
+      </select>
+    </div>
+    <div id="campo">
+      <label >¿Interés en?</label>
+      <select id="select" [(ngModel)]="preferencias().interes" name="tipoGusto">
+        <option value="Hombres">Hombres</option>
+        <option value="Mujeres">Mujeres</option>
+        <option value="Ambos">Ambos</option>
+      </select>
+    </div>
+  <button (click)="guardarCambios()">Guardar cambios</button>
+  </div>
+  </dialog>

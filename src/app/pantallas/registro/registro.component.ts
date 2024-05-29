@@ -30,52 +30,74 @@ export class RegistroComponent {
     private router: Router
   ) {
     this.formulario = this.formBuilder.group({
-      Nombre: ['', Validators.required],
-      Email: ['', [Validators.required, Validators.email]],
-      Contraseña: ['', Validators.required],
+      nombre: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      contrasena: ['', Validators.required],
       repetirContrasena: ['', Validators.required],
-      Nick: ['', Validators.required],
-      Foto: ['', Validators.required],
-      RolID: [2],
+      nick: ['', Validators.required],
+      foto: ['', Validators.required],
+      rolID: [2],
     });
   }
 
 
   async enviarRegistro() {
-    if(this.formulario.value.Contraseña !== this.formulario.value.repetirContrasena){
-      this.main.changeModal('error', 'Las contraseñas no coinciden')
-      return
+    if (this.formulario.value.contrasena !== this.formulario.value.repetirContrasena) {
+      this.main.changeModal('error', 'Las contraseñas no coinciden');
+      return;
     }
+
     if (this.formulario.valid) {
       const formData = new FormData();
       const keys = Object.keys(this.formulario.value);
 
       for (let key of keys) {
-        if (key == 'Foto') {
+        if (key === 'foto') {
           const inputElement = document.getElementById('foto-perfil') as HTMLInputElement;
-          const file = inputElement.files![0];
-          const reader = new FileReader();
+          const file = inputElement.files ? inputElement.files[0] : null;
 
-          // Convertimos el evento onloadend a una promesa
-          const result = await new Promise((resolve, reject) => {
-            reader.onloadend = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(file);
-          });
+          if (file) {
+            const maxSize = 5 * 1024 * 1024; // 5MB en bytes
 
-          formData.append('Foto', result as string);
-        } else {
+            if (file.size > maxSize) {
+              this.main.changeModal('error', 'La imagen es demasiado grande, de lo permitido es 5MB');
+            } else {
+              const reader = new FileReader();
+
+              const result = await new Promise<string | ArrayBuffer | null>((resolve, reject) => {
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+              });
+
+              if (typeof result === 'string') {
+                formData.append('foto', result);
+              } else {
+                console.error('Error: FileReader result is not a string');
+              }
+            }
+          } else {
+            console.error('Error: No file selected');
+          }
+        }
+         else {
           formData.append(key, this.formulario.value[key]);
         }
       }
 
+
+      // Llama al servicio para enviar el formulario
       this.registroService.crearRegistro(formData).subscribe(
         (response) => {
           this.main.changeModal('success', 'Registro exitoso');
           this.router.navigate(['/login']);
         },
         (error) => {
-          this.main.changeModal('error', 'Error al enviar el formulario');
+          if (error.status === 400) {
+            this.main.changeModal('error', 'El correo ya está en uso');
+          } else {
+            this.main.changeModal('error', 'Ha ocurrido un error: ' + error.error.message);
+          }
           // Aquí puedes mostrar un mensaje de error al usuario
         }
       );
@@ -83,4 +105,7 @@ export class RegistroComponent {
       this.main.changeModal('error', 'Por favor verifique todos los campos');
     }
   }
+
+
+
 }
