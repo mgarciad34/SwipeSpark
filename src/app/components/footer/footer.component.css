@@ -1,11 +1,8 @@
 .footer-container {
-  position: fixed;
-  left: 0;
-  bottom: 0;
+  margin-top: auto;
   width: 100%;
   background-color: #f9f9f9;
-  padding: 20px;
-  box-sizing: border-box;
+  padding: 20px;  
   text-align: center;
   background-image: linear-gradient(to right, #ff6f61, #ffcc29);
   z-index: 100;

@@ -3,6 +3,7 @@ import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { Socket } from 'socket.io-client';
 
 
 export const appConfig: ApplicationConfig = {
@@ -19,7 +20,8 @@ export const appConfig: ApplicationConfig = {
 
     importProvidersFrom
     (
-      HttpClientModule
+      HttpClientModule,
+      Socket,
     )
 
   ]

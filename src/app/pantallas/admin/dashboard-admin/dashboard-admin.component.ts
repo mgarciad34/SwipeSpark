@@ -39,6 +39,7 @@ export class DashboardAdminComponent {
   modalCrearEvento = signal(false)
   usuarioActual = signal<User>({})
   eventoActual = signal<Evento>({})
+  clavesExcluidas = ["contrasena", "foto", "createdAt", "updatedAt", "id","amistades","inscripcioneseventos","mensajes","preferencia","amigo_amistades","rol"]; // Claves a excluir
   cambiandoSubMenu(nuevoSubMenu: string) {
     this.subMenu.set(nuevoSubMenu)
   }
@@ -121,6 +122,31 @@ export class DashboardAdminComponent {
         this.main.changeModal('error', 'Usuario no encontrado')
       }
       if (response.status === 500) {
+        this.main.changeModal('error', 'Error en el servidor')
+      }
+    });
+  }
+
+  cambiarEstadoActivo(usuario:any,estado:any){
+    console.log(estado)
+  }
+
+  dataFiltrada(usuario:any) {
+    return Object.entries(usuario)
+      .filter(([key, value]) => !this.clavesExcluidas.includes(key))
+      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+  }
+
+
+  guardarCambios(usuario:any) {
+    this.usuariosServicio.actualizarUsuario(usuario.id, this.dataFiltrada(usuario)).subscribe((response) => {
+      if (response.status === 200) {
+        this.main.changeModal('success', 'Usuario actualizado correctamente')
+      }
+      if(response.status === 404) {
+        this.main.changeModal('error', 'No se realizaron cambios porque el usuario no existe')
+      }
+      if(response.status === 500) {
         this.main.changeModal('error', 'Error en el servidor')
       }
     });

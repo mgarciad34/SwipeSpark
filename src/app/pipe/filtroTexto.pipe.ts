@@ -13,10 +13,10 @@ export class FiltroTextoPipe implements PipeTransform {
     }
     filterPost = filterPost?.toLowerCase()!;
     return array.filter(item => item?.Nombre.toLowerCase().includes(filterPost)
-      || item?.Email?.toLowerCase().includes(filterPost)
-      || item?.Nick?.toLowerCase().includes(filterPost)
-      || item?.Estado?.toLowerCase().includes(filterPost)
-      || item?.RolID?.toString().includes(filterPost)
+      || item?.email?.toLowerCase().includes(filterPost)
+      || item?.nick?.toLowerCase().includes(filterPost)
+      || item?.estado?.toLowerCase().includes(filterPost)
+      || item?.rolID?.toString().includes(filterPost)
 
   );
   }

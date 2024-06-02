@@ -63,6 +63,7 @@ export class ModalPreferenciasUsuarioComponent implements OnInit {
       if (res.status === 201) {
         this.main.changeModal('success', 'Preferencias guardadas correctamente')
         this.cerrarModalFn()
+        window.location.reload()
       }else{
         this.main.changeModal('error', 'Error al guardar las preferencias' + res)
       }

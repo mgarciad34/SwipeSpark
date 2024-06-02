@@ -1,6 +1,33 @@
 <!--* boton que abre el menú de opciones solo disponible en pantallas mobiles-->
 <span id="navegador">
-  <img src="assets/nav.svg" alt="Navegador" />
+  <span [style.color]="pantallaActual() === 'Nav' ? '#ff6f61' : ''"  (click)="pantallaActual.set('Nav')">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24">
+      <path fill="currentColor" fill-rule="evenodd" d="M2.25 5A2.75 2.75 0 0 1 5 2.25h14A2.75 2.75 0 0 1 21.75 5v10A2.75 2.75 0 0 1 19 17.75H7.961c-.38 0-.739.173-.976.47l-2.33 2.913c-.798.996-2.405.433-2.405-.843z" clip-rule="evenodd" />
+    </svg>
+  </span>
+  <span [style.color]="pantallaActual() === 'Swipe' ? '#ff6f61' : ''" (click)="pantallaActual.set('Swipe')">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="m21.47 4.35l-1.34-.56v9.03l2.43-5.86c.41-1.02-.06-2.19-1.09-2.61m-19.5 3.7L6.93 20a2.01 2.01 0 0 0 1.81 1.26c.26 0 .53-.05.79-.16l7.37-3.05c.75-.31 1.21-1.05 1.23-1.79c.01-.26-.04-.55-.13-.81L13 3.5a1.95 1.95 0 0 0-1.81-1.25c-.26 0-.52.06-.77.15L3.06 5.45a1.994 1.994 0 0 0-1.09 2.6m16.15-3.8a2 2 0 0 0-2-2h-1.45l3.45 8.34" />
+    </svg>
+  </span>
+  <span [style.color]="pantallaActual() === 'Eventos' ? '#ff6f61' : ''" (click)="pantallaActual.set('Eventos')">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M21 17V8H7v9zm0-14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h1V1h2v2h8V1h2v2zM3 21h14v2H3a2 2 0 0 1-2-2V9h2zm16-6h-4v-4h4z" />
+    </svg>
+  </span>
+</span>
+
+<span id="navegador2">
+  <span [style.color]="pantallaActual() === '' ? '#ff6f61' : ''" (click)="pantallaActual.set('')">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 15 15">
+      <path fill="currentColor" d="M7.825.12a.5.5 0 0 0-.65 0L0 6.27v7.23A1.5 1.5 0 0 0 1.5 15h4a.5.5 0 0 0 .5-.5v-3a1.5 1.5 0 0 1 3 0v3a.5.5 0 0 0 .5.5h4a1.5 1.5 0 0 0 1.5-1.5V6.27z" />
+    </svg>
+  </span>
+  <span [style.color]="pantallaActual() === 'Eventos' ? '#ff6f61' : ''" (click)="pantallaActual.set('Eventos')">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M21 17V8H7v9zm0-14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h1V1h2v2h8V1h2v2zM3 21h14v2H3a2 2 0 0 1-2-2V9h2zm16-6h-4v-4h4z" />
+    </svg>
+  </span>
 </span>
 <!--* boton que abre el menú de opciones solo disponible en pantallas mobiles-->
 
@@ -17,6 +44,140 @@
 <img src="assets/logout.svg" alt="Cerrar sesión" />
 </span>
 </nav>
+<div id="columns">
+  <div id="botonesDePaginasNav">
+    <span (click)="pageNav.set('MD')" [style]="pageNav() === 'MD' ? 'background-color: #ff6f61; color:white' : 'background-color: white ;'" id="botonSwipe">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" viewBox="0 0 24 24">
+        <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
+          <path d="M4 3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h1v2a1 1 0 0 0 1.707.707L9.414 13H15a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1z" />
+          <path d="M8.023 17.215q.05-.046.098-.094L10.243 15H15a3 3 0 0 0 3-3V8h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-1v2a1 1 0 0 1-1.707.707L14.586 18H9a1 1 0 0 1-.977-.785" />
+        </g>
+      </svg>
+    </span>
+    <span (click)="pageNav.set('Enviados')" [style]="pageNav() === 'Enviados' ? 'background-color: #ff6f61; color:white' : 'background-color: white;'"  id="botonSwipe">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" viewBox="0 0 24 24">
+        <g fill="none">
+          <path d="M24 0v24H0V0zM12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036c-.01-.003-.019 0-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z" />
+          <path fill="currentColor" d="M20.235 5.686c.432-1.195-.726-2.353-1.921-1.92L3.709 9.048c-1.199.434-1.344 2.07-.241 2.709l4.662 2.699l4.163-4.163a1 1 0 0 1 1.414 1.414L9.544 15.87l2.7 4.662c.638 1.103 2.274.957 2.708-.241z" />
+        </g>
+      </svg>
+    </span>
+    <span (click)="pageNav.set('Solicitudes')" [style]="pageNav() === 'Solicitudes' ? 'background-color: #ff6f61; color:white' : 'background-color: white;'"  id="botonSwipe">
+      <app-notify *ngIf="solicitudesRecibidas().length > 0" [numeroDeNotificaciones]="solicitudesRecibidas().length"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" viewBox="0 0 24 24" transform="rotate(180)">
+        <g fill="none">
+          <path d="M24 0v24H0V0zM12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036c-.01-.003-.019 0-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z" />
+          <path fill="currentColor" d="M20.235 5.686c.432-1.195-.726-2.353-1.921-1.92L3.709 9.048c-1.199.434-1.344 2.07-.241 2.709l4.662 2.699l4.163-4.163a1 1 0 0 1 1.414 1.414L9.544 15.87l2.7 4.662c.638 1.103 2.274.957 2.708-.241z" />
+        </g>
+      </svg>
+
+    </span>
+</div>
+<div id="pagesNav">
+  @if(pageNav() === 'MD'){
+    <span>Amigos activos: <strong>{{obtenerTamanoUsuariosActivos()}}</strong></span>
+    @for(md of amigos(); track md.id){
+      <span (click)="abrirChat(usuario().id,md.id,md)" id="mensajeCompacto">
+        @if(this.usuariosActivos()[md.nick!]){
+          <app-activo/>
+        }
+        <span  id="fotoPerfilMensaje">
+          <img src="{{md.foto}}" alt="Foto de perfil de {{md.nick}}" />
+
+        </span>
+        <div id="dataMensaje">
+          <span style="font-weight: bold;">{{md.nick}}</span>
+        </div>
+      </span>
+    }
+  }
+  @if(pageNav() === 'Enviados'){
+    @for(md of solicitudesEnviadas(); track md.id){
+      <span (click)="abrirChat(usuario().id,md.id,md)" id="mensajeCompacto">
+        @if(this.usuariosActivos()[md.nick!]){
+          <app-activo/>
+        }
+        <span  id="fotoPerfilMensaje">
+          <img src="{{md.foto}}" alt="Foto de perfil de {{md.nick}}" />
+
+        </span>
+        <div id="dataMensaje">
+          <span style="font-weight: bold;">{{md.nick}}</span>
+        </div>
+      </span>
+    }
+  }
+  @if(pageNav() === 'Solicitudes'){
+    @for(md of solicitudesRecibidas(); track md.id){
+      <span (click)="abrirChat(usuario().id,md.id,md)" id="mensajeCompacto">
+        @if(this.usuariosActivos()[md.nick!]){
+          <app-activo/>
+        }
+        <span  id="fotoPerfilMensaje">
+          <img src="{{md.foto}}" alt="Foto de perfil de {{md.nick}}" />
+
+        </span>
+        <div id="dataMensaje">
+          <span style="font-weight: bold;">{{md.nick}}</span>
+        </div>
+      </span>
+    }
+  }
+
+  @if(pageNav() === 'MensajeDirecto'){
+    <div id="chat">
+      <div id="headerMensaje">
+        @if(this.usuariosActivos()[mdActivo().nick!]){
+          <app-activo/>
+        }
+        <span  id="fotoPerfilMensaje">
+          <img src="{{mdActivo().foto}}" alt="Foto de perfil de {{mdActivo().nick}}" />
+        </span>
+        <div id="dataMensaje">
+          <span style="font-weight: bold;">{{mdActivo().nick}}</span>
+          <div style="margin-top: auto;"
+            *ngIf="usuarioEscribiendo() && usuarioEscribiendo() === mdActivo().nick &&
+              compararIdChat(usuario().id?.toString()!  ,mdActivo().id?.toString()!)">
+            <strong>{{ usuarioEscribiendo() }}</strong> está escribiendo...
+          </div>
+        </div>
+      </div>
+      <div id="mensajes">
+        @for(mensaje of mensajes(); track mensaje.id){
+          @if((mensaje.remitenteID === usuario().id && mensaje.receptorID === mdActivo().id) || (mensaje.remitenteID === mdActivo().id && mensaje.receptorID === usuario().id)){
+            @if(mensaje.remitenteID === usuario().id){
+              <div id="mensajeEnviado">
+                <span>
+                  {{mensaje.contenido}}
+                </span>
+                <p id="fechaMensaje">{{formatFecha(mensaje.fechaEnvio)}}</p>
+              </div>
+            }@else{
+              <div id="mensajeRecibido">
+                <span>
+                  {{mensaje.contenido}}
+                </span>
+                <p id="fechaMensaje">{{formatFecha(mensaje.fechaEnvio)}}</p>
+              </div>
+            }
+          }
+
+        }
+      </div>
+      <div id="enviarMensaje">
+        <input   (keydown.enter)="enviarMensaje(contenido(), usuario().id?.toString()!, mdActivo().id?.toString()!, archivoAdjunto()); limpiarInput()"
+        [(ngModel)]="contenido" (keydown)="notificarEscribiendo(usuario().nick!,usuario().id!.toString() ,mdActivo().id!.toString()); refrescar()" id="inputMensaje" style="width: 100%;" type="text" placeholder="Escribe un mensaje"  />
+        <span style="cursor: pointer;" (click)="enviarMensaje(contenido(),usuario().id?.toString()!, mdActivo().id?.toString()! ,archivoAdjunto())"  id="botonEnviar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24">
+            <path fill="#808080" d="M3 20v-6l8-2l-8-2V4l19 8z" />
+          </svg>
+        </span>
+      </div>
+    </div>
+  }
+
+</div>
+</div>
 </div>
 
 
@@ -38,10 +199,25 @@
         <path fill="currentColor" d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53z" />
       </svg>
     </span>
+    <span (click)="pageSwipe.set('Solicitudes')" [style]="pageSwipe() === 'Solicitudes' ? 'background-color: #ff6f61; color:white' : 'background-color: white;'"  id="botonSwipe">
+      <app-notify *ngIf="solicitudesRecibidas().length > 0" [numeroDeNotificaciones]="solicitudesRecibidas().length"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+        <g fill="none">
+          <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+          <path fill="currentColor" d="M16 14a5 5 0 0 1 5 5v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1a5 5 0 0 1 5-5zm4-6a1 1 0 0 1 1 1v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 1 1 0-2h1V9a1 1 0 0 1 1-1m-8-6a5 5 0 1 1 0 10a5 5 0 0 1 0-10" />
+        </g>
+      </svg>
+    </span>
   </div>
 @if(pageSwipe() === 'Dislikes' && listo()){
   @if(dislikes()[actualIndiceDislike()]?.foto !== undefined && dislikes()[actualIndiceDislike()]?.foto !== null && dislikes()[actualIndiceDislike()]?.foto !== '' && listo()){
     <div id="likePerfiles">
+      <span *ngIf="dislikes().length > 1" (click)="anteriorDislike()" id="direLeft">
+        <img src="assets/left.svg">
+      </span>
+      <span *ngIf="dislikes().length > 1" (click)="siguienteDislike()" id="direRight">
+        <img src="assets/right.svg">
+      </span>
       <div id="fotoPerfilMatch">
       <img src="{{dislikes()[actualIndiceDislike()]?.foto}}" alt="Foto de perfil de Match" />
       </div>
@@ -49,17 +225,17 @@
       <span>{{dislikes()[actualIndiceDislike()]?.nick}}</span>
       </div>
       <div id="seccionLike">
-      <span (click)="dislike()" (mouseenter)="rotarLikePerfiles('dislike')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+      <span (click)="dislike(dislikes()[actualIndiceDislike()].id)" (mouseenter)="rotarLikePerfiles('dislike')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
         <img src="assets/dislike.svg" alt="Dislike" />
       </span>
-      <span (click)="like()" (mouseenter)="rotarLikePerfiles('like')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+      <span (click)="like(dislikes()[actualIndiceDislike()].id)" (mouseenter)="rotarLikePerfiles('like')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
         <img src="assets/like.svg" alt="Like" />
       </span>
       </div>
       </div>
   }@else{
     <div style="text-align: center;" id="likePerfiles">
-      No hay más perfiles para mostrar
+      No has rechazado a nadie!
     </div>
   }
 }
@@ -67,54 +243,95 @@
   @if(actualRecomendacion()?.foto !== undefined && actualRecomendacion()?.foto !== null && actualRecomendacion()?.foto !== '' && listo()){
     <div id="likePerfiles">
       <div id="fotoPerfilMatch">
-      <img src="{{actualRecomendacion()?.foto}}" alt="Foto de perfil de Match" />
+      <img src="{{actualRecomendacion().foto}}" alt="Foto de perfil de Match" />
       </div>
       <div id="dataPerfilMatch">
-      <span>{{actualRecomendacion()?.nick}}</span>
+      <span>{{actualRecomendacion().nick}}</span>
       </div>
       <div id="seccionLike">
-      <span (click)="dislike()" (mouseenter)="rotarLikePerfiles('dislike')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+      <span (click)="dislike(actualRecomendacion().id)" (mouseenter)="rotarLikePerfiles('dislike')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
         <img src="assets/dislike.svg" alt="Dislike" />
       </span>
-      <span (click)="like()" (mouseenter)="rotarLikePerfiles('like')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+      <span (click)="like(actualRecomendacion().id)" (mouseenter)="rotarLikePerfiles('like')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
         <img src="assets/like.svg" alt="Like" />
       </span>
       </div>
       </div>
   }@else{
     <div style="text-align: center;" id="likePerfiles">
-      No hay más perfiles para mostrar
+      No hay más recomendaciones para tus preferencias!
     </div>
   }
 }
 @if(pageSwipe() === 'Likes' && listo()){
   @if(solicitudesEnviadas()[actualIndiceLike()]?.foto !== undefined && solicitudesEnviadas()[actualIndiceLike()]?.foto !== null && solicitudesEnviadas()[actualIndiceLike()]?.foto !== '' && listo()){
     <div id="likePerfiles">
+      <span *ngIf="solicitudesEnviadas().length > 1" (click)="anteriorLike()" id="direLeft">
+        <img src="assets/left.svg">
+      </span>
+      <span *ngIf="solicitudesEnviadas().length > 1" (click)="siguienteLike()" id="direRight">
+        <img src="assets/right.svg">
+      </span>
       <div id="fotoPerfilMatch">
-      <img src="{{solicitudesEnviadas()[actualIndiceLike()]?.foto}}" alt="Foto de perfil de Match" />
+      <img src="{{solicitudesEnviadas()[actualIndiceLike()].foto}}" alt="Foto de perfil de Match" />
       </div>
       <div id="dataPerfilMatch">
-      <span>{{solicitudesEnviadas()[actualIndiceLike()]?.nick}}</span>
+      <span>{{solicitudesEnviadas()[actualIndiceLike()].nick}}</span>
       </div>
       <div id="seccionLike">
-      <span (click)="dislike()" (mouseenter)="rotarLikePerfiles('dislike')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+      <span (click)="dislike(solicitudesEnviadas()[actualIndiceLike()].id)" (mouseenter)="rotarLikePerfiles('dislike')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
         <img src="assets/dislike.svg" alt="Dislike" />
       </span>
-      <span (click)="like()" (mouseenter)="rotarLikePerfiles('like')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
-        <img src="assets/like.svg" alt="Like" />
+      <span (click)="abrirMensajeLikeEnviado()"  (mouseenter)="rotarLikePerfiles('like')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+        <img src="assets/message.svg" alt="message" />
       </span>
       </div>
       </div>
   }@else{
     <div style="text-align: center;" id="likePerfiles">
-      No hay más perfiles para mostrar
+      No tienes solicitudes de amistad enviadas!
     </div>
   }
 }
+@if(pageSwipe() === 'Solicitudes' && listo()){
+     @if(solicitudesRecibidas()[actualIndiceSolicitud()]?.foto !== undefined && solicitudesRecibidas()[actualIndiceSolicitud()]?.foto !== null && solicitudesRecibidas()[actualIndiceSolicitud()]?.foto !== '' && listo()){
+       <div id="likePerfiles">
+         <span *ngIf="solicitudesRecibidas().length > 1" (click)="anteriorSolicitud()" id="direLeft">
+           <img src="assets/left.svg">
+         </span>
+         <span *ngIf="solicitudesRecibidas().length > 1" (click)="siguienteLike()" id="direRight">
+           <img src="assets/right.svg">
+         </span>
+         <div id="fotoPerfilMatch">
+         <img src="{{solicitudesRecibidas()[actualIndiceSolicitud()].foto}}" alt="Foto de perfil de Match" />
+         </div>
+         <div id="dataPerfilMatch">
+         <span>{{solicitudesRecibidas()[actualIndiceSolicitud()].nick}}</span>
+         </div>
+         <div id="seccionLike">
+         <span (click)="dislike(solicitudesRecibidas()[actualIndiceSolicitud()].id)" (mouseenter)="rotarLikePerfiles('dislike')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+           <img src="assets/dislike.svg" alt="Dislike" />
+         </span>
+         <span (click)="like(solicitudesRecibidas()[actualIndiceSolicitud()].id)" (mouseenter)="rotarLikePerfiles('like')" (mouseleave)="reiniciarLikePerfiles()" id="butonLike" >
+          <img src="assets/like.svg" alt="Like" />
+        </span>
+         </div>
+         </div>
+     }@else{
+       <div style="text-align: center;" id="likePerfiles">
+         No tienes solicitudes de amistad entrantes!
+       </div>
+     }
+   }
 
 
 </div>
+<!--?Modal de preferencias-->
 
+
+<div *ngIf="pantallaActual() === 'Eventos'">
+
+</div>
 @if(usuario().preferencia === null || usuario().preferencia === undefined || usuario().preferencia.length === 0 && listo()){
   <app-modal-preferencias-usuario
   *ngIf="modalPreferencias()"
@@ -123,11 +340,9 @@
   (actualizarUsuario)="obtenerUsuario()"
   />
 }
+
 </main>
 <!--! sección principal-->
-
-<!--?Modal de preferencias-->
-
 
 <!--* footer-->
 <app-footer></app-footer>

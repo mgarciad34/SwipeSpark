@@ -13,6 +13,7 @@ dialog {
   justify-content: center;
   justify-content: center;
   align-items: center;
+  z-index: 2000;
 }
 
 @media (min-width: 1280px) {
@@ -20,7 +21,6 @@ dialog {
     max-width: 700px;
     max-height: auto;
   }
-
 }
 
 
