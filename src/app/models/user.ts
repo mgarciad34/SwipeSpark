@@ -9,8 +9,10 @@ export interface User {
   foto?: string;
   rolID?: number;
   amistades?: any
+  amigo_amistades?: any
   inscripcioneseventos?: any
   mensajes?: any
+  genero?: any
   preferencia?: any
   createdAt?: Date;
   updatedAt?: Date;

@@ -3,13 +3,16 @@
 <div class="subMenu" *ngIf="subMenu() === 'eventos'">
 <h2 class="tituloPrincipal">Eventos</h2>
 <div id="listaEventos">
+  <span (click)="modalCrearEvento.set(!modalCrearEvento())" id="crearEvento">Crear evento +</span>
+
   <input type="text" id="buscador" placeholder="Buscar evento" [(ngModel)]="filter">
   <div id="contenedor">
+
     @for(evento of eventos() | appFiltroTexto:filter(); track evento.id){
       <div id="columnaEvento">
-        <span style="width: 100%;">{{evento.Nombre}}</span>
-        <span style="width: 100%;">{{evento.FechaRealizacion}}</span>
-        <span style="width: 100%;">{{evento.Descripcion}}</span>
+        <span style="width: 100%;">{{evento.nombre}}</span>
+        <span style="width: 100%;">{{evento.fechaRealizacion}}</span>
+        <span style="width: 100%;">{{evento.descripcion}}</span>
         <div id="operaciones">
           <span (click)="eventoActual.set(evento); modalEvento.set(!modalEvento())" id="operacion">
             <img src="assets/edit.svg">
@@ -24,7 +27,6 @@
       <p>No hay eventos actuales</p>
     }
   </div>
-  <span (click)="modalCrearEvento.set(!modalCrearEvento())" id="crearEvento">Crear evento +</span>
 </div>
 </div>
 
@@ -40,7 +42,18 @@
         <div id="columnaUsuario">
           <span style="width: 100%;">{{usuario.nombre}}</span>
           <span style="width: 100%;">{{usuario.email}}</span>
-          <span style="width: 100%;">{{usuario.estado}}</span>
+          <span (click)="usuario.estado === 'activo' ? usuario.estado = 'inactivo' : usuario.estado = 'activo'; guardarCambios(usuario)">
+            @if(usuario.estado === 'activo'){
+              <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 512 512">
+                <path fill="green" d="M368 112H144a144 144 0 0 0 0 288h224a144 144 0 0 0 0-288m0 230a86 86 0 1 1 86-86a85.88 85.88 0 0 1-86 86" />
+              </svg>
+            }@else{
+              <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24">
+                <path fill="red" d="M8 7a5 5 0 0 0 0 10h8a5 5 0 0 0 0-10zm0-2h8a7 7 0 1 1 0 14H8A7 7 0 1 1 8 5m0 10a3 3 0 1 1 0-6a3 3 0 0 1 0 6" />
+              </svg>
+
+            }
+          </span>
           <div id="operaciones">
             <span (click)="usuarioActual.set(usuario); modalUsuario.set(!modalUsuario())" id="operacion">
               <img src="assets/edit.svg">

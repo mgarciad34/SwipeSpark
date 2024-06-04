@@ -2,7 +2,6 @@
   display: block;
   min-width: 100%;
   min-height: 100%;
-  margin-bottom: 80px;
 }
 
 main{
@@ -12,6 +11,7 @@ main{
   justify-content: center;
   align-items: center;
   padding: 20px, 0px, 20px, 0px;
+  min-height:calc(100vh);
 }
 #Nav {
   min-width: 300px;
