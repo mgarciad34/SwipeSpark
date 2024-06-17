@@ -20,7 +20,7 @@ import { mapaData } from '../../../models/mapa';
 })
 export class ModalMapComponent implements OnInit {
   @Input() mapaData: mapaData = {
-    nombre: 'Ubicación Default',
+    nombre: 'Ubicacion',
     latitud: 38.90853,
     longitud: -3.65933,
   };
@@ -47,7 +47,7 @@ export class ModalMapComponent implements OnInit {
     );
     this.marker = marker([this.mapaData.latitud, this.mapaData.longitud])
       .addTo(this.map)
-      .bindPopup(this.mapaData.nombre || 'Ubicación Default');
+      .bindPopup(this.mapaData.nombre || 'Ubicacion');
     this.updateMarkerPosition();
   }
 
@@ -56,7 +56,7 @@ export class ModalMapComponent implements OnInit {
       this.marker.remove(); // Elimina el marcador existente
       this.marker = marker([this.mapaData.latitud, this.mapaData.longitud])
         .addTo(this.map)
-        .bindPopup(this.mapaData.nombre || 'Ubicación Default');
+        .bindPopup(this.mapaData.nombre || 'Ubicacion');
     }
   }
 

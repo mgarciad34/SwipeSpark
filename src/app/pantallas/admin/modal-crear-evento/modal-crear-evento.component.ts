@@ -24,9 +24,9 @@ export class ModalCrearEventoComponent implements OnInit, AfterViewInit, OnDestr
   editandoMapa = false;
 
   @Input() mapaData: mapaData = {
-    nombre: 'Ubicación Default',
-    latitud: 40.387183111568596,
-    longitud: -82.66667223256182,
+    nombre: 'Ubicacion',
+    latitud: 38.90655,
+    longitud: -3.65765,
   };
 
   @Input() evento: Evento = {

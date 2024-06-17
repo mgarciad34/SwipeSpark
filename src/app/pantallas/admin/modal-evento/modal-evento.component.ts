@@ -25,13 +25,13 @@ export class ModalEventoComponent implements OnInit {
      map: any;
      markers: Marker[] = []; // Array para almacenar los marcadores
      editandoMapa = false;
-   
+
      @Input() mapaData: mapaData = {
-       nombre: 'Ubicación Default',
-       latitud: 40.387183111568596,
-       longitud: -82.66667223256182,
+       nombre: 'Ubicacion',
+       latitud: 38.90655,
+       longitud: -3.65765,
      };
-     
+
   @Input() evento!: Evento;
   @Output() cerrarModal = new EventEmitter<boolean>();
   clavesExcluidas = ["createdAt", "updatedAt", "id"]; // Claves a excluir
@@ -53,7 +53,7 @@ export class ModalEventoComponent implements OnInit {
    ngOnDestroy(): void {
      this.destruirMapa();
    }
- 
+
 
   cerrarModalFn = () => this.cerrarModal.emit(false);
 
@@ -129,76 +129,76 @@ export class ModalEventoComponent implements OnInit {
        this.destruirMapa();
      }
    }
- 
+
    cargarMapa(item: any) {
      const mapaData = item;
- 
+
      if (!this.map) { // Verificar si el mapa ya está inicializado
        this.map = new Map('map').setView([mapaData.latitud, mapaData.longitud], 13);
- 
+
        // Agregar capa de tiles
        tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map);
- 
+
        // Agregar un marcador inicial
        const initialMarker = marker([mapaData.latitud, mapaData.longitud]).addTo(this.map)
          .bindPopup(mapaData.nombre)
          .openPopup();
        this.markers.push(initialMarker);
- 
+
        this.map.on('click', (e: L.LeafletMouseEvent) => {
          const lat = e.latlng.lat;
          const lng = e.latlng.lng;
          this.map.setView([lat, lng], 13);
- 
+
          // Eliminar los marcadores existentes
          this.markers.forEach(m => this.map.removeLayer(m));
          this.markers = [];
- 
+
          // Agregar un nuevo marcador
          const newMarker = marker([lat, lng]).addTo(this.map)
            .bindPopup('Ubicación seleccionada')
            .openPopup();
          this.markers.push(newMarker);
- 
+
          this.evento.geolocalizacion = `${lat},${lng}`;
          this.mapaData.latitud = lat;
          this.mapaData.longitud = lng;
        });
      } else { // Si el mapa ya está inicializado, simplemente cambia el centro y el marcador
        this.map.setView([mapaData.latitud, mapaData.longitud], 13);
- 
+
        // Eliminar los marcadores existentes
        this.markers.forEach(m => this.map.removeLayer(m));
        this.markers = [];
- 
+
        // Agregar un nuevo marcador
        const newMarker = marker([mapaData.latitud, mapaData.longitud]).addTo(this.map)
          .bindPopup(mapaData.nombre)
          .openPopup();
        this.markers.push(newMarker);
- 
+
        this.map.on('click', (e: L.LeafletMouseEvent) => {
          const lat = e.latlng.lat;
          const lng = e.latlng.lng;
          this.map.setView([lat, lng], 13);
- 
+
          // Eliminar los marcadores existentes
          this.markers.forEach(m => this.map.removeLayer(m));
          this.markers = [];
- 
+
          // Agregar un nuevo marcador
          const newMarker = marker([lat, lng]).addTo(this.map)
            .bindPopup('Ubicación seleccionada')
            .openPopup();
          this.markers.push(newMarker);
- 
+
          this.evento.geolocalizacion = `${lat},${lng}`;
          this.mapaData.latitud = lat;
          this.mapaData.longitud = lng;
        });
      }
    }
- 
+
    destruirMapa() {
      if (this.map) {
        this.map.off();
