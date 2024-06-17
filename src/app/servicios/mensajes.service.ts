@@ -100,7 +100,7 @@ export class MensajesService {
   private empezarLatidos(userID: string) {
     this.intervaloDeActividadDeUsuario = setInterval(() => {
       this.socket.emit('usuarioActivo', userID);
-    }, 5000); // Enviar cada 5 segundos
+    }, 5000);
   }
 
   private pararLatidos() {

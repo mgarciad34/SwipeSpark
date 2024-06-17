@@ -20,7 +20,7 @@ import { mapaData } from '../../../models/mapa';
 })
 export class ModalCrearEventoComponent implements OnInit, AfterViewInit, OnDestroy {
   map: any;
-  markers: Marker[] = []; // Array para almacenar los marcadores
+  markers: Marker[] = [];
   editandoMapa = false;
 
   @Input() mapaData: mapaData = {
@@ -39,7 +39,7 @@ export class ModalCrearEventoComponent implements OnInit, AfterViewInit, OnDestr
 
   @Output() cerrarModal = new EventEmitter<boolean>();
   @Output() guardar = new EventEmitter<boolean>();
-  clavesExcluidas = ["createdAt", "updatedAt", "id"]; // Claves a excluir
+  clavesExcluidas = ["createdAt", "updatedAt", "id"];
 
   constructor(private eventosServicio: EventosService, private main: AppComponent, private cdr: ChangeDetectorRef) { }
 
@@ -85,7 +85,7 @@ export class ModalCrearEventoComponent implements OnInit, AfterViewInit, OnDestr
     if (this.editandoMapa) {
       setTimeout(() => {
         this.cargarMapa(this.mapaData);
-      }, 0);  // Asegura que el DOM se ha actualizado
+      }, 0);
     } else {
       this.destruirMapa();
     }

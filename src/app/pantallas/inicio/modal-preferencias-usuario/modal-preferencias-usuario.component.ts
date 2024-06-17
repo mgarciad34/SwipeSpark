@@ -38,9 +38,6 @@ export class ModalPreferenciasUsuarioComponent implements OnInit {
   preferenciasArray: Preferencia[]= []
   constructor(private main:AppComponent, private preferenciasService: PreferenciasService) {}
   ngOnInit(): void {
-    // interval(1000).subscribe(() => {
-    //   console.log(this.usuario)
-    // } )
   }
   cerrarModalFn = () => this.cerrarModal.emit(false);
   actualizarUsuarioFn = () => this.actualizarUsuario.emit();

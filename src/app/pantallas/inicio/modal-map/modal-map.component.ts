@@ -53,7 +53,7 @@ export class ModalMapComponent implements OnInit {
 
   updateMarkerPosition() {
     if (this.marker) {
-      this.marker.remove(); // Elimina el marcador existente
+      this.marker.remove();
       this.marker = marker([this.mapaData.latitud, this.mapaData.longitud])
         .addTo(this.map)
         .bindPopup(this.mapaData.nombre || 'Ubicacion');
@@ -61,7 +61,7 @@ export class ModalMapComponent implements OnInit {
   }
 
   cargarMapa(item: any) {
-    this.mapaData = item; // Actualiza los datos del mapa
-    this.updateMarkerPosition(); // Actualiza la posición del marcador
+    this.mapaData = item;
+    this.updateMarkerPosition();
   }
 }

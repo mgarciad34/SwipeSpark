@@ -90,7 +90,7 @@ export class InicioComponent implements OnInit {
   socketSubscription!: Subscription;
   escribirSubscription!: Subscription;
   intervalId: any;
-  
+
   ngOnInit(): void {
     this.obtenerUsuario();
     this.obtenerEventos();
@@ -202,37 +202,31 @@ export class InicioComponent implements OnInit {
   }
 
   siguienteDislike(){
-    //aqui movemos el indice 0 al final
     this.dislikes().push(this.dislikes().shift()!)
     this.asignarDislike()
   }
 
   siguienteLike(){
-    //aqui movemos el indice 0 al final
     this.solicitudesEnviadas().push(this.solicitudesEnviadas().shift()!)
     this.asignarLike()
   }
 
   anteriorDislike(){
-    //aqui movemos el siguiente indice al principio y el primero al final
     this.dislikes().unshift(this.dislikes().pop()!)
     this.asignarDislike()
   }
 
   anteriorLike(){
-    //aqui movemos el siguiente indice al principio y el primero al final
     this.solicitudesEnviadas().unshift(this.solicitudesEnviadas().pop()!)
     this.asignarLike()
   }
 
   siguienteSolicitud(){
-    //aqui movemos el indice 0 al final
     this.solicitudesRecibidas().push(this.solicitudesRecibidas().shift()!)
     this.asignarRecomendacion()
   }
 
   anteriorSolicitud(){
-    //aqui movemos el siguiente indice al principio y el primero al final
     this.solicitudesRecibidas().unshift(this.solicitudesRecibidas().pop()!)
     this.asignarRecomendacion()
   }
@@ -483,7 +477,6 @@ export class InicioComponent implements OnInit {
     const idChatAcomparar = this.calcularIdChat(remitenteId, receptorId);
     const inversoAcomparar = this.calcularIdChat(receptorId, remitenteId);
 
-    // Compara el ID de chat actual con ambos casos
     if(this.idChatActual() === idChatAcomparar || this.idChatActual() === inversoAcomparar ||
        this.reverseidChatActual() === idChatAcomparar || this.reverseidChatActual() === inversoAcomparar) {
 
@@ -515,7 +508,7 @@ export class InicioComponent implements OnInit {
                this.main.changeModal('error', 'Error al obtener los eventos!');
                this.eventos.set([])
           }
-     
+
      });
   }
 
@@ -523,7 +516,7 @@ export class InicioComponent implements OnInit {
 
      this.eventos().forEach((evento:Evento) => {
           if(evento.id === eventoId){
-               
+
                if(evento.inscripcioneseventos!.length === 0 || evento.inscripcioneseventos!.length === undefined || evento.inscripcioneseventos!.length === null){
                     if(this.cerraronInscripciones(eventoId)){
                          console.log("no")
@@ -544,7 +537,7 @@ export class InicioComponent implements OnInit {
                     });
                }else{
                     evento.inscripcioneseventos?.forEach((inscripcion:any) => {
-                         if(inscripcion.usuarioID === usuarioId){     
+                         if(inscripcion.usuarioID === usuarioId){
                               this.eventosService.desinscribirseAEvento(usuarioId, eventoId).subscribe((res) => {
                                    if(res.status === 200){
                                         this.main.changeModal('success', 'Desinscrito del evento correctamente!');
@@ -624,13 +617,12 @@ export class InicioComponent implements OnInit {
      this.dataMapa.set(dataMapa)
      this.modalMap.set(abierto)
    }
-   
+
 
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
      this.anchoViewport = event.target.innerWidth;
-     // Aquí puedes agregar lógica para modificar tus variables según el ancho del viewport
      if (this.anchoViewport > 768) {
        this.pantallaActual.set('')
      } else {
@@ -638,7 +630,7 @@ export class InicioComponent implements OnInit {
      }
    }
 
-   
+
   ngOnDestroy(): void {
     if (this.socketSubscription) {
       this.socketSubscription.unsubscribe();

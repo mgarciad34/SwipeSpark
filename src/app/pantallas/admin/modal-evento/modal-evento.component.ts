@@ -23,7 +23,7 @@ import { Map, marker, tileLayer, Marker } from 'leaflet';
 })
 export class ModalEventoComponent implements OnInit {
      map: any;
-     markers: Marker[] = []; // Array para almacenar los marcadores
+     markers: Marker[] = [];
      editandoMapa = false;
 
      @Input() mapaData: mapaData = {
@@ -34,7 +34,7 @@ export class ModalEventoComponent implements OnInit {
 
   @Input() evento!: Evento;
   @Output() cerrarModal = new EventEmitter<boolean>();
-  clavesExcluidas = ["createdAt", "updatedAt", "id"]; // Claves a excluir
+  clavesExcluidas = ["createdAt", "updatedAt", "id"];
   usuarios = signal({} as { [key: number]: string })
 
   constructor(private eventosServicio: EventosService, private main: AppComponent, private usuariosService: UsuariosService, private cdr: ChangeDetectorRef) { }
@@ -124,7 +124,7 @@ export class ModalEventoComponent implements OnInit {
      if (this.editandoMapa) {
        setTimeout(() => {
          this.cargarMapa(this.mapaData);
-       }, 0);  // Asegura que el DOM se ha actualizado
+       }, 0);
      } else {
        this.destruirMapa();
      }

@@ -85,8 +85,6 @@ export class RegistroComponent {
         }
       }
 
-
-      // Llama al servicio para enviar el formulario
       this.registroService.crearRegistro(formData).subscribe(
         (response) => {
           this.main.changeModal('success', 'Registro exitoso');
@@ -98,7 +96,6 @@ export class RegistroComponent {
           } else {
             this.main.changeModal('error', 'Ha ocurrido un error: ' + error.error.message);
           }
-          // Aquí puedes mostrar un mensaje de error al usuario
         }
       );
     } else {

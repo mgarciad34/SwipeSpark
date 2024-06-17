@@ -31,11 +31,6 @@ export class InactivoComponent implements OnInit {
     } );
   }
 
-
-
-
-
-
   cerrarAplicacion(){
     this.loginService.cerrarAplicacion();
   }
