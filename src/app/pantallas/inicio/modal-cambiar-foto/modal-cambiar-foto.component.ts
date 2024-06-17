@@ -53,12 +53,12 @@ export class ModalCambiarFotoComponent implements OnInit {
 
   cambiarFoto($event: any) {
     const file = $event.target.files[0];
-    const maxSize = 5 * 1024 * 1024; // 5MB en bytes
+    const maxSize = 5 * 1024 * 1024;
 
     if (file.size > maxSize) {
       this.main.changeModal('error', 'La imagen es demasiado grande, de lo permitido es 5MB ');
       $event.target.value = '';
-      return; // Salir de la función si el archivo es demasiado grande
+      return;
     }
 
     const reader = new FileReader();

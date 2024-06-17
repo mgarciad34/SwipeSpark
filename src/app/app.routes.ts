@@ -12,10 +12,10 @@ import { adminGuard } from './guards/admin.guard';
 import { SeccionUsuarioComponent } from './pantallas/inicio/seccion-usuario/seccion-usuario.component';
 
 export const routes: Routes = [
-  {path: 'login', component: LoginComponent,canActivate:[authGuard]},  // login
-  {path: 'registro', component: RegistroComponent,canActivate:[authGuard]}, // registro
-  {path: 'recuperar', component: RecuperarComponent,canActivate:[authGuard]}, // recuperar contraseña
-  {path: 'inactivo', component: InactivoComponent,canActivate:[inactiveGuard]}, // inactivo
+  {path: 'login', component: LoginComponent,canActivate:[authGuard]},
+  {path: 'registro', component: RegistroComponent,canActivate:[authGuard]},
+  {path: 'recuperar', component: RecuperarComponent,canActivate:[authGuard]},
+  {path: 'inactivo', component: InactivoComponent,canActivate:[inactiveGuard]},
   {path: '',component:InicioComponent,canActivate:[stateGuard],},
   {path: 'admin/dashboard', canActivate:[adminGuard], component: DashboardAdminComponent},
   {path: 'perfil',component: SeccionUsuarioComponent,canActivate:[stateGuard]}

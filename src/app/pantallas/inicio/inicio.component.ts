@@ -15,6 +15,10 @@ import { Mensaje } from '../../models/mensaje';
 import { ActivoComponent } from '../../components/activo/activo.component';
 import { FormsModule } from '@angular/forms';
 import { SHA256 } from 'crypto-js';
+import { Evento } from '../../models/eventos';
+import { EventosService } from '../../servicios/eventos.service';
+import { ModalMapComponent } from './modal-map/modal-map.component';
+import { mapaData } from '../../models/mapa';
 @Component({
   selector: 'app-inicio',
   standalone: true,
@@ -26,26 +30,15 @@ import { SHA256 } from 'crypto-js';
     RouterLink,
     NotifyComponent,
     ActivoComponent,
-    FormsModule
+    FormsModule,
+    ModalMapComponent,
   ],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InicioComponent implements OnInit {
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.anchoViewport = event.target.innerWidth;
-    // Aquí puedes agregar lógica para modificar tus variables según el ancho del viewport
-    if (this.anchoViewport > 768) {
-      this.pantallaActual.set('')
-    } else {
-      this.pantallaActual.set('Swipe')
-    }
-  }
-
-  mensajesService = inject(MensajesService);
-  constructor(private loginService: LoginService, private usuariosService: UsuariosService, private router:Router, private main: AppComponent, private cdr: ChangeDetectorRef) {
+  constructor(private loginService: LoginService, private usuariosService: UsuariosService, private router:Router, private main: AppComponent, private cdr: ChangeDetectorRef, private eventosService:EventosService, private mensajesService:MensajesService) {
       this.iniciarVerificacionPeriodica();
       this.socketSubscription = this.mensajesService.on('recibirMensaje').subscribe((mensaje) => {
         console.log('Mensaje recibido', mensaje);
@@ -66,6 +59,7 @@ export class InicioComponent implements OnInit {
   }
   anchoViewport!: number;
   usuario = signal({} as User)
+  eventos = signal([] as Evento[])
   mensajes = signal([] as Mensaje[])
   pantallaActual = signal('')
   modalPreferencias = signal(true)
@@ -91,11 +85,15 @@ export class InicioComponent implements OnInit {
   cantidad = signal(5);
   pageSwipe = signal('Recomendaciones');
   pageNav = signal('MD');
+  modalMap = signal(false);
+  dataMapa = signal([] as mapaData);
   socketSubscription!: Subscription;
   escribirSubscription!: Subscription;
+  intervalId: any;
 
   ngOnInit(): void {
     this.obtenerUsuario();
+    this.obtenerEventos();
     this.escribirSubscription = this.mensajesService.escribiendo().subscribe(data => {
       this.usuarioEscribiendo.set(data.nick);
       this.idChatActual.set(data.idChat);
@@ -105,8 +103,6 @@ export class InicioComponent implements OnInit {
       this.iniciarTemporizadorReseteo();
     });
   }
-
-  private intervalId: any;
 
   iniciarVerificacionPeriodica(): void {
     if (this.intervalId) {
@@ -206,37 +202,31 @@ export class InicioComponent implements OnInit {
   }
 
   siguienteDislike(){
-    //aqui movemos el indice 0 al final
     this.dislikes().push(this.dislikes().shift()!)
     this.asignarDislike()
   }
 
   siguienteLike(){
-    //aqui movemos el indice 0 al final
     this.solicitudesEnviadas().push(this.solicitudesEnviadas().shift()!)
     this.asignarLike()
   }
 
   anteriorDislike(){
-    //aqui movemos el siguiente indice al principio y el primero al final
     this.dislikes().unshift(this.dislikes().pop()!)
     this.asignarDislike()
   }
 
   anteriorLike(){
-    //aqui movemos el siguiente indice al principio y el primero al final
     this.solicitudesEnviadas().unshift(this.solicitudesEnviadas().pop()!)
     this.asignarLike()
   }
 
   siguienteSolicitud(){
-    //aqui movemos el indice 0 al final
     this.solicitudesRecibidas().push(this.solicitudesRecibidas().shift()!)
     this.asignarRecomendacion()
   }
 
   anteriorSolicitud(){
-    //aqui movemos el siguiente indice al principio y el primero al final
     this.solicitudesRecibidas().unshift(this.solicitudesRecibidas().pop()!)
     this.asignarRecomendacion()
   }
@@ -471,6 +461,7 @@ export class InicioComponent implements OnInit {
     this.contenido.set('')
     this.archivoAdjunto.set(null)
   }
+
   cerrarAplicacion(): void{
     this.router.navigate(['/login'])
     this.loginService.cerrarAplicacion()
@@ -486,7 +477,6 @@ export class InicioComponent implements OnInit {
     const idChatAcomparar = this.calcularIdChat(remitenteId, receptorId);
     const inversoAcomparar = this.calcularIdChat(receptorId, remitenteId);
 
-    // Compara el ID de chat actual con ambos casos
     if(this.idChatActual() === idChatAcomparar || this.idChatActual() === inversoAcomparar ||
        this.reverseidChatActual() === idChatAcomparar || this.reverseidChatActual() === inversoAcomparar) {
 
@@ -506,6 +496,140 @@ export class InicioComponent implements OnInit {
     const combinedIDs = remitenteID + receptorID;
     return SHA256(combinedIDs).toString();
   }
+
+  obtenerEventos(){
+     this.eventos.set([])
+     this.eventosService.obtenerEventos().subscribe((res) => {
+          if(res.status === 200){
+               this.eventos.set(res.body)
+               console.log(this.eventos())
+          }
+          if(res.status === 500){
+               this.main.changeModal('error', 'Error al obtener los eventos!');
+               this.eventos.set([])
+          }
+
+     });
+  }
+
+  toggleEvento(usuarioId:any, eventoId:any){
+
+     this.eventos().forEach((evento:Evento) => {
+          if(evento.id === eventoId){
+
+               if(evento.inscripcioneseventos!.length === 0 || evento.inscripcioneseventos!.length === undefined || evento.inscripcioneseventos!.length === null){
+                    if(this.cerraronInscripciones(eventoId)){
+                         console.log("no")
+                         this.main.changeModal('error', 'Cerradas inscripciones!');
+                         return
+                     }
+                    this.eventosService.inscribirseAEvento(usuarioId, eventoId).subscribe((res) => {
+                         if(res.status === 201){
+                              this.main.changeModal('success', 'Inscrito al evento correctamente!');
+                              this.obtenerEventos()
+                         }
+                         if(res.status === 404){
+                              this.main.changeModal('error', 'Ya estas inscrito al evento!');
+                         }
+                         if(res.status === 500){
+                              this.main.changeModal('error', 'Error al inscribirse al evento!');
+                         }
+                    });
+               }else{
+                    evento.inscripcioneseventos?.forEach((inscripcion:any) => {
+                         if(inscripcion.usuarioID === usuarioId){
+                              this.eventosService.desinscribirseAEvento(usuarioId, eventoId).subscribe((res) => {
+                                   if(res.status === 200){
+                                        this.main.changeModal('success', 'Desinscrito del evento correctamente!');
+                                        this.obtenerEventos()
+                                   }
+                                   if(res.status === 500){
+                                        this.main.changeModal('error', 'Error al desinscribirse al evento!');
+                                   }
+                              });
+                         }else{
+                              if(this.cerraronInscripciones(eventoId)){
+                                   console.log("no")
+                                   this.main.changeModal('error', 'Cerradas inscripciones!');
+                                   return
+                               }
+                              this.eventosService.inscribirseAEvento(usuarioId, eventoId).subscribe((res) => {
+                                   if(res.status === 201){
+                                        this.main.changeModal('success', 'Inscrito al evento correctamente!');
+                                        this.obtenerEventos()
+                                   }
+                                   if(res.status === 500){
+                                        this.main.changeModal('error', 'Error al inscribirse al evento!');
+                                   }
+                              });
+                         }
+                    } )
+               }
+
+          }
+     })
+  }
+
+  seEncuentraEnElEvento(usuarioId:any, eventoId:any){
+     let inscrito = false
+     this.eventos().forEach((evento:Evento) => {
+          if(evento.id === eventoId){
+               if(evento.inscripcioneseventos!.length === 0 || evento.inscripcioneseventos!.length === undefined || evento.inscripcioneseventos!.length === null){
+                    inscrito = false
+               }else{
+                    evento.inscripcioneseventos?.forEach((inscripcion:any) => {
+                         if(inscripcion.usuarioID === usuarioId){
+                              inscrito = true
+                         }
+                    } )
+               }
+          }
+     })
+     return inscrito
+  }
+
+  cerraronInscripciones(eventoId: any): boolean {
+     let cerrado = false;
+     this.eventos().forEach((evento: Evento) => {
+       if (evento.id === eventoId) {
+         const fechaCierreInscripcion = new Date(evento.fechaCierreInscripcion!);
+         const fechaActual = new Date();
+         if (fechaCierreInscripcion < fechaActual) {
+           cerrado = true;
+         }
+       }
+     });
+     return cerrado;
+   }
+
+   cambiandoValorModalMap($event:boolean){
+     this.modalMap.set($event)
+   }
+
+   alistandoElMapa(abierto:boolean, evento:Evento){
+     console.log(abierto)
+     console.log(evento)
+     const dataMapa = {
+          nombre: evento.nombre,
+          latitud: evento.geolocalizacion?.split(',')[0],
+          longitud: evento.geolocalizacion?.split(',')[1]
+     }
+     this.dataMapa.set(dataMapa)
+     this.modalMap.set(abierto)
+   }
+
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+     this.anchoViewport = event.target.innerWidth;
+     if (this.anchoViewport > 768) {
+       this.pantallaActual.set('')
+     } else {
+       this.pantallaActual.set('Swipe')
+     }
+   }
+
 
   ngOnDestroy(): void {
     if (this.socketSubscription) {

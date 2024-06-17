@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+
+dialog {
+     width: 80%;
+     transform: translateY(50%);
+     height: auto;
+     background-color: white;
+     border: 2px solid black;
+     border-radius: 20px;
+     justify-content: center;
+     justify-content: center;
+     align-items: center;
+     z-index: 200;
+   }
+
+
+   @media (min-width: 1280px) {
+     dialog {
+       max-width: 700px;
+       max-height: auto;
+     }
+   
+   }
+
+   #map { height: 400px; }
+   
+   #close{
+     position: absolute;
+     z-index: 200;
+     top: 2px;
+     right: 2px;
+     cursor: pointer;
+   }

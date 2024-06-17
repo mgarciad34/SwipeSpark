@@ -39,7 +39,7 @@ export class DashboardAdminComponent {
   modalCrearEvento = signal(false)
   usuarioActual = signal<User>({})
   eventoActual = signal<Evento>({})
-  clavesExcluidas = ["contrasena", "foto", "createdAt", "updatedAt", "id","amistades","inscripcioneseventos","mensajes","preferencia","amigo_amistades","rol"]; // Claves a excluir
+  clavesExcluidas = ["contrasena", "foto", "createdAt", "updatedAt", "id","amistades","inscripcioneseventos","mensajes","preferencia","amigo_amistades","rol"];
   cambiandoSubMenu(nuevoSubMenu: string) {
     this.subMenu.set(nuevoSubMenu)
   }

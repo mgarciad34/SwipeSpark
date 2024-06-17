@@ -18,7 +18,7 @@ import { AppComponent } from '../../../app.component';
 export class ModalUsuarioComponent implements OnInit {
   @Input() usuario: any;
   @Output() cerrarModal = new EventEmitter<boolean>();
-  clavesExcluidas = ["contrasena", "foto", "createdAt", "updatedAt", "id","amistades","inscripcioneseventos","mensajes","preferencia","amigo_amistades","rol"]; // Claves a excluir
+  clavesExcluidas = ["contrasena", "foto", "createdAt", "updatedAt", "id","amistades","inscripcioneseventos","mensajes","preferencia","amigo_amistades","rol"];
   constructor(private usuariosServicio: UsuariosService, private main:AppComponent) {}
   ngOnInit(): void {}
   cerrarModalFn = () => this.cerrarModal.emit(false);

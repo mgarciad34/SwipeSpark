@@ -1,7 +1,7 @@
 #alertBox {
   color: white;
   width: 300px;
-  position: absolute;
+  position: fixed;
   left: 50%;
   font-weight: 600; /* Equivalente a font-semibold */
   transform: translateX(-50%);

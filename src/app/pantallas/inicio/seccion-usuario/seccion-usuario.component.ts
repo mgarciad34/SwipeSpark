@@ -43,7 +43,7 @@ export class SeccionUsuarioComponent implements OnInit {
   modalPreferencias = signal(true)
   modalCambiarFoto = signal(false)
   modalCambiarPass = signal(false)
-  clavesExcluidas = ["createdAt", "updatedAt", "id","amigo_amistades","amistades","inscripcioneseventos","rolID","mensajes","preferencia","contraseña","foto"]; // Claves a excluir
+  clavesExcluidas = ["createdAt", "updatedAt", "id","amigo_amistades","amistades","inscripcioneseventos","rolID","mensajes","preferencia","contraseña","foto"];
   ngOnInit(): void {
     this.obtenerUsuario()
 
@@ -123,11 +123,7 @@ export class SeccionUsuarioComponent implements OnInit {
         }
         }
       )
-
   }
-
-
-
 }
 
 

@@ -44,6 +44,17 @@ main{
   border-right: 2px solid rgb(164, 164, 164,0.5);
 }
 
+
+#Eventos {
+     min-width: 300px;
+     min-height: auto;
+     display: flex;
+     width: 100%;
+     height: auto;
+     flex-direction: column;
+     border-right: 2px solid rgb(164, 164, 164,0.5);
+   }
+
 #Swipe {
   min-width: 70%;
   min-height: auto;
@@ -99,8 +110,8 @@ main{
 }
 
 #navegador{
-  position: absolute;
-  bottom: 10px;
+  position: fixed;
+  bottom: 70px;
   right: 50%;
   transform: translateX(50%);
   display: flex;
@@ -116,10 +127,9 @@ main{
 }
 
 
-
 #navegador2{
-  position: absolute;
-  bottom: 10px;
+  position: fixed;
+  bottom: 70px;
   right: 50%;
   transform: translateX(50%);
   display: none;
@@ -416,6 +426,102 @@ main{
   font-size: 10px;
   color: rgb(68, 68, 68);
   background-color: none;
+}
+
+#grid{
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+     justify-items: center;
+     gap: 10px;
+     padding: 10px;
+     height: auto;
+     min-height: calc(100vh - 90px);
+     width: 100%;
+     overflow-y: auto;
+     overflow-x: hidden;
+}
+
+#eventoContainer{
+     display: flex;
+     flex-direction: column;
+     max-width: 300px;
+     max-height: 500px;
+     height: 100%;
+     min-height: 500px;
+     width: 100%;
+     gap: 10px;
+     border: 1px solid rgb(164, 164, 164,0.5);
+     border-radius: 20px;
+}
+
+#eventoNombre{
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+     align-items: center;
+     text-overflow: ellipsis;
+     white-space: nowrap;     
+     overflow: hidden;
+     padding: 10px;
+     font-weight: bold;
+     color: white;
+     background-image: linear-gradient(to right, #ff6f61, #ffcc29);
+     border-radius: 20px;
+
+}
+
+#eventoInfo{
+     display: flex;
+     flex-direction: column;
+     padding: 10px;
+     gap: 10px;
+}
+
+#eventoDescripcion{
+     display: flex;
+     flex-direction: column;
+     font-style: italic;
+     padding-bottom: 10px;
+     border-bottom: 1px solid rgba(128, 128, 128, 0.466);
+     max-height: 200px;
+     min-height: 200px;
+     overflow: hidden;
+     overflow-y: auto;
+     
+}
+
+#eventoFecha{
+     text-align: center;
+}
+
+#eventoInscritos{
+     text-align: center;
+     font-weight: bold;
+}
+
+#eventoUbicacionBoton{
+     text-align: center;
+     padding: 10px;
+     border: 1px solid rgba(128, 128, 128, 0.466);
+     border-radius: 20px;
+     cursor: pointer;
+}
+
+#eventoUbicacionBoton:hover{
+     background-color: rgb(197, 198, 199);
+}
+
+#eventoInscribirseBoton{
+     text-align: center;
+     padding: 10px;
+     border: 1px solid rgba(128, 128, 128, 0.466);
+     border-radius: 20px;
+     cursor: pointer;
+}
+
+#eventoInscribirseBoton:hover{
+     background-color: rgba(11, 161, 31, 0.274);
+     
 }
 
 @media (min-width: 768px) {

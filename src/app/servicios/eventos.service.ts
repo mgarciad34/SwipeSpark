@@ -10,6 +10,8 @@ export class EventosService {
   private urlCrearEvento = `${environment.apiUrl}/crear/evento`;
   private urlEventos = `${environment.apiUrl}/eventos`;
   private urlEvento = `${environment.apiUrl}/evento`;
+  private urlInscribirseAEvento = `${environment.apiUrl}/evento/inscribir`;
+  private urlDesinscribirseAEvento = `${environment.apiUrl}/evento/desinscribir`;
 
   constructor(private http: HttpClient) {}
 
@@ -46,4 +48,21 @@ export class EventosService {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
     });
   }
+
+  inscribirseAEvento(idUsuario:any, idEvento:any): Observable<HttpResponse<any>> {
+    const token = localStorage.getItem('token');
+    return this.http.post<any>(this.urlInscribirseAEvento, {idUsuario, idEvento}, {
+      observe: 'response',
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
+  }
+
+  desinscribirseAEvento(idUsuario:any, idEvento:any): Observable<HttpResponse<any>> {
+     const token = localStorage.getItem('token');
+     return this.http.post<any>(this.urlDesinscribirseAEvento, {idUsuario, idEvento}, {
+       observe: 'response',
+       headers: token ? { Authorization: `Bearer ${token}` } : {},
+     });
+       }
+  
 }
