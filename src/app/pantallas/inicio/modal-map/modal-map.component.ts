@@ -15,53 +15,53 @@ import { mapaData } from '../../../models/mapa';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './modal-map.component.html',
-  styleUrl: './modal-map.component.css',
+  styleUrls: ['./modal-map.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalMapComponent implements OnInit {
   @Input() mapaData: mapaData = {
     nombre: 'Ubicación Default',
-    latitud: 40.387183111568596,
-    longitud: -82.66667223256182,
+    latitud: 38.90853,
+    longitud: -3.65933,
   };
   @Output() cerrarModal = new EventEmitter<boolean>();
   @Output() guardar = new EventEmitter<boolean>();
-  map: any;
+  private map: any;
+  private marker: any;
 
   constructor() {}
+
   cerrarModalFn = () => this.cerrarModal.emit(false);
 
   ngOnInit(): void {
-    this.cargarMapa(this.mapaData);
+    this.initMap();
+  }
+
+  initMap() {
+    this.map = new Map('map').setView(
+      [this.mapaData.latitud, this.mapaData.longitud],
+      13
+    );
+    tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(
+      this.map
+    );
+    this.marker = marker([this.mapaData.latitud, this.mapaData.longitud])
+      .addTo(this.map)
+      .bindPopup(this.mapaData.nombre || 'Ubicación Default');
+    this.updateMarkerPosition();
+  }
+
+  updateMarkerPosition() {
+    if (this.marker) {
+      this.marker.remove(); // Elimina el marcador existente
+      this.marker = marker([this.mapaData.latitud, this.mapaData.longitud])
+        .addTo(this.map)
+        .bindPopup(this.mapaData.nombre || 'Ubicación Default');
+    }
   }
 
   cargarMapa(item: any) {
-    const mapaData = item;
-
-    if (!this.map) {
-      // Verificar si el mapa ya está inicializado
-      this.map = new Map('map').setView(
-        [mapaData.latitud, mapaData.longitud],
-        13
-      );
-
-      // Agregar capa de tiles
-      tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {}).addTo(
-        this.map
-      );
-
-      // Agregar un marcador
-      marker([mapaData.latitud, mapaData.longitud])
-        .addTo(this.map)
-        .bindPopup(mapaData.nombre)
-        .openPopup();
-    } else {
-      // Si el mapa ya está inicializado, simplemente cambia el centro y el marcador
-      this.map.setView([mapaData.latitud, mapaData.longitud], 13);
-      marker([mapaData.latitud, mapaData.longitud])
-        .addTo(this.map)
-        .bindPopup(mapaData.nombre)
-        .openPopup();
-    }
+    this.mapaData = item; // Actualiza los datos del mapa
+    this.updateMarkerPosition(); // Actualiza la posición del marcador
   }
 }
