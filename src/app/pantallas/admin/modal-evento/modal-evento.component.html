@@ -24,7 +24,20 @@
       <label >Fecha de Cierre</label>
       <input style="width: 100%;" type="date"  [(ngModel)]="evento.fechaCierreInscripcion">
     </div>
-
+    <h2>Inscritos</h2>
+    <div id="inscritosContainer">
+     @for(inscrito of evento.inscripcioneseventos; track inscrito.id){
+          <div  id="inscrito">
+               <label>{{ usuarios()[inscrito.usuarioID] || 'Cargando...' }}</label>
+               <label (click)="eliminarUsuarioDelEvento(inscrito.usuarioID, evento.id)" id="quitar">Quitar del evento</label>
+          </div>
+     }
+     @empty {
+          <div id="inscrito">
+               <label style="text-align: center; width: 100%;">No hay inscritos</label>
+          </div>
+     }
+    </div>
   <button (click)="guardarCambios()">Guardar cambios</button>
   </div>
   </dialog>
